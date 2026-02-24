@@ -81,17 +81,3 @@ CREATE TABLE anexo (
     requerimento_id integer references requerimento (id) -- fk
 );
 
-
-
-
-
-
-
-
-
-
-
-
-
-CREATE TABLE anexo
-
