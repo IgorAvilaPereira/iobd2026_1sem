@@ -8,7 +8,7 @@ CREATE TABLE curso (
     id serial primary key,
     nome character varying(200) not null,
     site character varying(200),
-    turno character varying(200) check('NOTURNO', 'DIURNO', 'VESPERTINO'),
+    turno character varying(200) check(turno in('NOTURNO', 'DIURNO', 'VESPERTINO')),
     duracao integer check(duracao > 0) -- em horas
 );
 
@@ -71,7 +71,7 @@ CREATE TABLE requerimento (
     status text check(status in ('EM ANÁLISE', 'INDEFERIDO', 'DEFERIDO')) DEFAULT 'EM ANÁLISE',
     tipo_requerimento_id integer references tipo_requerimento (id) -- fk
 );
-INSERT INTO requerimento (aluno_matricula, tipo_requerimento) VALUES
+INSERT INTO requerimento (aluno_matricula, tipo_requerimento_id) VALUES
 ('1231231231', 12); -- IGOR pediu REINGRESSO e automagicamente fica em analise (valor default)
 
 CREATE TABLE anexo (
