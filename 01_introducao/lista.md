@@ -2,7 +2,7 @@
 
 **1)** Liste matrícula e nome do aluno (INNER JOIN).
 
-<!-- sql
+<!-- ```sql
 SELECT a.matricula, u.nome
 FROM aluno a
 INNER JOIN usuario u ON u.id = a.usuario_id;
@@ -10,7 +10,7 @@ INNER JOIN usuario u ON u.id = a.usuario_id;
 
 **2)** Mesmo exercício usando `USING`.
 
-<!-- sql
+<!-- ```sql
 SELECT a.matricula, u.nome
 FROM aluno a
 JOIN usuario u USING (id);
@@ -20,7 +20,7 @@ JOIN usuario u USING (id);
 
 **3)** Liste alunos e curso.
 
-<!-- sql
+<!-- ```sql
 SELECT u.nome, c.nome
 FROM aluno a
 JOIN usuario u ON u.id = a.usuario_id
@@ -29,7 +29,7 @@ JOIN curso c ON c.id = a.curso_id;
 
 **4)** Liste requerimentos com tipo (INNER JOIN).
 
-<!-- sql
+<!-- ```sql
 SELECT r.id, t.descricao
 FROM requerimento r
 JOIN tipo_requerimento t ON t.id = r.tipo_requerimento_id;
@@ -37,7 +37,7 @@ JOIN tipo_requerimento t ON t.id = r.tipo_requerimento_id;
 
 **5)** LEFT JOIN alunos e requerimentos.
 
-<!-- sql
+<!-- ```sql
 SELECT a.matricula, r.id
 FROM aluno a
 LEFT JOIN requerimento r ON r.aluno_matricula = a.matricula;
@@ -45,7 +45,7 @@ LEFT JOIN requerimento r ON r.aluno_matricula = a.matricula;
 
 **6)** Liste alunos sem requerimento (LEFT + IS NULL).
 
-<!-- sql
+<!-- ```sql
 SELECT a.matricula
 FROM aluno a
 LEFT JOIN requerimento r ON r.aluno_matricula = a.matricula
@@ -54,7 +54,7 @@ WHERE r.id IS NULL;
 
 **7)** RIGHT JOIN requerimentos e anexos.
 
-<!-- sql
+<!-- ```sql
 SELECT r.id, an.id
 FROM requerimento r
 RIGHT JOIN anexo an ON an.requerimento_id = r.id;
@@ -62,7 +62,7 @@ RIGHT JOIN anexo an ON an.requerimento_id = r.id;
 
 **8)** FULL JOIN aluno e requerimento.
 
-<!-- sql
+<!-- ```sql
 SELECT a.matricula, r.id
 FROM aluno a
 FULL JOIN requerimento r ON r.aluno_matricula = a.matricula;
@@ -70,7 +70,7 @@ FULL JOIN requerimento r ON r.aluno_matricula = a.matricula;
 
 **9)** Tipos nunca solicitados (LEFT).
 
-<!-- sql
+<!-- ```sql
 SELECT t.descricao
 FROM tipo_requerimento t
 LEFT JOIN requerimento r ON r.tipo_requerimento_id = t.id
@@ -79,7 +79,7 @@ WHERE r.id IS NULL;
 
 **10)** Requerimentos com nome do aluno e tipo.
 
-<!-- sql
+<!-- ```sql
 SELECT u.nome, t.descricao, r.status
 FROM requerimento r
 JOIN aluno a ON a.matricula = r.aluno_matricula
@@ -87,26 +87,96 @@ JOIN usuario u ON u.id = a.usuario_id
 JOIN tipo_requerimento t ON t.id = r.tipo_requerimento_id;
 -->
 
-**11–20)**
-Incluem variações com:
+# 🔷 JOINS AVANÇADOS (11–20)
 
-* INNER JOIN + WHERE status
-* LEFT JOIN + COALESCE
-* RIGHT JOIN invertido
-* JOIN com múltiplas condições
-* JOIN + GROUP BY
-* JOIN + HAVING COUNT > 1
-* NATURAL JOIN (quando colunas compatíveis)
-* JOIN USING (tipo_requerimento_id)
-
-Exemplo HAVING:
+**11)** Liste requerimentos deferidos com nome do aluno (INNER JOIN + WHERE).
 
 <!-- sql
-SELECT a.matricula, COUNT(r.id)
+SELECT u.nome, r.id
+FROM requerimento r
+JOIN aluno a ON a.matricula = r.aluno_matricula
+JOIN usuario u ON u.id = a.usuario_id
+WHERE r.status = 'DEFERIDO';
+-->
+
+**12)** Liste requerimentos indeferidos com descrição do tipo.
+
+<!-- sql
+SELECT r.id, t.descricao
+FROM requerimento r
+JOIN tipo_requerimento t ON t.id = r.tipo_requerimento_id
+WHERE r.status = 'INDEFERIDO';
+-->
+
+**13)** Liste alunos e quantidade de requerimentos (LEFT JOIN + GROUP BY).
+
+<!-- sql
+SELECT a.matricula, COUNT(r.id) qtd
 FROM aluno a
 LEFT JOIN requerimento r ON r.aluno_matricula = a.matricula
+GROUP BY a.matricula;
+-->
+
+**14)** Liste apenas alunos com mais de 1 requerimento (HAVING).
+
+<!-- sql
+SELECT a.matricula, COUNT(r.id) qtd
+FROM aluno a
+JOIN requerimento r ON r.aluno_matricula = a.matricula
 GROUP BY a.matricula
 HAVING COUNT(r.id) > 1;
+-->
+
+**15)** Liste requerimentos com quantidade de anexos (LEFT + COALESCE).
+
+<!-- sql
+SELECT r.id,
+COALESCE(COUNT(a.id),0) qtd_anexos
+FROM requerimento r
+LEFT JOIN anexo a ON a.requerimento_id = r.id
+GROUP BY r.id;
+-->
+
+**16)** Liste todos os usuários e suas possíveis matrículas (LEFT JOIN).
+
+<!-- sql
+SELECT u.nome, a.matricula
+FROM usuario u
+LEFT JOIN aluno a ON a.usuario_id = u.id;
+-->
+
+**17)** Liste cursos e alunos (RIGHT JOIN).
+
+<!-- sql
+SELECT c.nome, a.matricula
+FROM aluno a
+RIGHT JOIN curso c ON c.id = a.curso_id;
+-->
+
+**18)** Liste requerimentos e anexos apenas quando houver anexo (INNER JOIN).
+
+<!-- sql
+SELECT r.id, a.id
+FROM requerimento r
+JOIN anexo a ON a.requerimento_id = r.id;
+-->
+
+**19)** Liste todos alunos e requerimentos inclusive sem correspondência (FULL JOIN).
+
+<!-- sql
+SELECT a.matricula, r.id
+FROM aluno a
+FULL JOIN requerimento r
+ON r.aluno_matricula = a.matricula;
+-->
+
+**20)** Utilize JOIN ... USING para listar requerimentos e tipo.
+
+<!-- sql
+SELECT r.id, t.descricao
+FROM requerimento r
+JOIN tipo_requerimento t
+USING (tipo_requerimento_id);
 -->
 
 ---
@@ -115,7 +185,7 @@ HAVING COUNT(r.id) > 1;
 
 **36)** Quantidade de requerimentos por status.
 
-<!-- sql
+<!-- ```sql
 SELECT status, COUNT(*)
 FROM requerimento
 GROUP BY status;
@@ -123,7 +193,7 @@ GROUP BY status;
 
 **37)** Tipos com mais de 1 ocorrência.
 
-<!-- sql
+<!-- ```sql
 SELECT tipo_requerimento_id, COUNT(*)
 FROM requerimento
 GROUP BY tipo_requerimento_id
@@ -132,7 +202,7 @@ HAVING COUNT(*) > 1;
 
 **38)** Requerimentos por aluno.
 
-<!-- sql
+<!-- ```sql
 SELECT aluno_matricula, COUNT(*)
 FROM requerimento
 GROUP BY aluno_matricula;
@@ -140,7 +210,7 @@ GROUP BY aluno_matricula;
 
 **39)** Ano de abertura + contagem.
 
-<!-- sql
+<!-- ```sql
 SELECT EXTRACT(YEAR FROM data_hora_abertura) ano,
 COUNT(*)
 FROM requerimento
@@ -149,7 +219,7 @@ GROUP BY ano;
 
 **40)** Mês atual.
 
-<!-- sql
+<!-- ```sql
 SELECT *
 FROM requerimento
 WHERE EXTRACT(MONTH FROM data_hora_abertura) =
@@ -158,34 +228,144 @@ EXTRACT(MONTH FROM CURRENT_DATE);
 
 **41)** Média duração cursos.
 
-<!-- sql
+<!-- ```sql
 SELECT AVG(duracao)
 FROM curso;
 -->
 
 **42)** Cursos acima da média.
 
-<!-- sql
+<!-- ```sql
 SELECT *
 FROM curso
 WHERE duracao > (SELECT AVG(duracao) FROM curso);
 -->
 
-**43–55)**
-Incluem:
 
-* COUNT DISTINCT
-* MAX / MIN
-* HAVING com AVG
-* GROUP BY múltiplas colunas
-* GROUP BY + JOIN
+# 🔷 GROUP BY / HAVING (43–55)
 
-Exemplo DISTINCT:
+**43)** Conte quantidade distinta de alunos que abriram requerimento.
 
 <!-- sql
 SELECT COUNT(DISTINCT aluno_matricula)
 FROM requerimento;
 -->
+
+**44)** Liste o aluno com maior número de requerimentos.
+
+<!-- sql
+SELECT aluno_matricula, COUNT(*) qtd
+FROM requerimento
+GROUP BY aluno_matricula
+ORDER BY qtd DESC
+LIMIT 1;
+-->
+
+**45)** Liste quantidade de requerimentos por ano.
+
+<!-- sql
+SELECT EXTRACT(YEAR FROM data_hora_abertura) ano,
+COUNT(*)
+FROM requerimento
+GROUP BY ano;
+-->
+
+**46)** Liste quantidade por mês do ano atual.
+
+<!-- sql
+SELECT EXTRACT(MONTH FROM data_hora_abertura) mes,
+COUNT(*)
+FROM requerimento
+WHERE EXTRACT(YEAR FROM data_hora_abertura) =
+EXTRACT(YEAR FROM CURRENT_DATE)
+GROUP BY mes;
+-->
+
+**47)** Média de requerimentos por aluno.
+
+<!-- sql
+SELECT AVG(qtd)
+FROM (
+  SELECT COUNT(*) qtd
+  FROM requerimento
+  GROUP BY aluno_matricula
+) sub;
+-->
+
+**48)** Liste tipos ordenados pela quantidade.
+
+<!-- sql
+SELECT tipo_requerimento_id, COUNT(*) qtd
+FROM requerimento
+GROUP BY tipo_requerimento_id
+ORDER BY qtd DESC;
+-->
+
+**49)** Liste tipos com pelo menos 2 solicitações.
+
+<!-- sql
+SELECT tipo_requerimento_id, COUNT(*) qtd
+FROM requerimento
+GROUP BY tipo_requerimento_id
+HAVING COUNT(*) >= 2;
+-->
+
+**50)** Quantidade de anexos por requerimento com HAVING > 0.
+
+<!-- sql
+SELECT requerimento_id, COUNT(*) qtd
+FROM anexo
+GROUP BY requerimento_id
+HAVING COUNT(*) > 0;
+-->
+
+**51)** Total de requerimentos encerrados por ano.
+
+<!-- sql
+SELECT EXTRACT(YEAR FROM data_hora_encerramento) ano,
+COUNT(*)
+FROM requerimento
+WHERE data_hora_encerramento IS NOT NULL
+GROUP BY ano;
+-->
+
+**52)** Requerimentos por status ordenados.
+
+<!-- sql
+SELECT status, COUNT(*) qtd
+FROM requerimento
+GROUP BY status
+ORDER BY qtd DESC;
+-->
+
+**53)** Liste cursos e total de alunos (JOIN + GROUP).
+
+<!-- sql
+SELECT c.nome, COUNT(a.matricula)
+FROM curso c
+LEFT JOIN aluno a ON a.curso_id = c.id
+GROUP BY c.nome;
+-->
+
+**54)** Liste cursos com mais de 10 alunos.
+
+<!-- sql
+SELECT c.nome, COUNT(a.matricula)
+FROM curso c
+JOIN aluno a ON a.curso_id = c.id
+GROUP BY c.nome
+HAVING COUNT(a.matricula) > 10;
+-->
+
+**55)** Liste alunos que abriram requerimento em mais de um ano.
+
+<!-- sql
+SELECT aluno_matricula
+FROM requerimento
+GROUP BY aluno_matricula
+HAVING COUNT(DISTINCT EXTRACT(YEAR FROM data_hora_abertura)) > 1;
+-->
+
 
 ---
 
@@ -193,7 +373,7 @@ FROM requerimento;
 
 **56)** Requerimentos de hoje.
 
-<!-- sql
+<!-- ```sql
 SELECT *
 FROM requerimento
 WHERE DATE(data_hora_abertura) = CURRENT_DATE;
@@ -201,7 +381,7 @@ WHERE DATE(data_hora_abertura) = CURRENT_DATE;
 
 **57)** Diferença em dias.
 
-<!-- sql
+<!-- ```sql
 SELECT id,
 (data_hora_encerramento - data_hora_abertura) AS dias
 FROM requerimento;
@@ -209,7 +389,7 @@ FROM requerimento;
 
 **58)** Requerimentos últimos 30 dias.
 
-<!-- sql
+<!-- ```sql
 SELECT *
 FROM requerimento
 WHERE data_hora_abertura >= CURRENT_DATE - INTERVAL '30 days';
@@ -217,14 +397,14 @@ WHERE data_hora_abertura >= CURRENT_DATE - INTERVAL '30 days';
 
 **59)** Extrair dia da semana.
 
-<!-- sql
+<!-- ```sql
 SELECT EXTRACT(DOW FROM data_hora_abertura)
 FROM requerimento;
 -->
 
 **60)** Idade do usuário.
 
-<!-- sql
+<!-- ```sql
 SELECT nome,
 EXTRACT(YEAR FROM AGE(data_nascimento))
 FROM usuario;
@@ -236,7 +416,7 @@ FROM usuario;
 
 **71)** Buscar nome com ILIKE.
 
-<!-- sql
+<!-- ```sql
 SELECT *
 FROM usuario
 WHERE nome ILIKE '%igor%';
@@ -244,157 +424,270 @@ WHERE nome ILIKE '%igor%';
 
 **72)** Uppercase.
 
-<!-- sql
+<!-- ```sql
 SELECT UPPER(nome)
 FROM usuario;
 -->
 
 **73)** Lowercase.
 
-<!-- sql
+<!-- ```sql
 SELECT LOWER(nome)
 FROM usuario;
 -->
 
 **74)** Tamanho do nome.
 
-<!-- sql
+<!-- ```sql
 SELECT nome, LENGTH(nome)
 FROM usuario;
 -->
 
 **75)** Concatenar nome + email.
 
-<!-- sql
+<!-- ```sql
 SELECT nome || ' - ' || email
 FROM usuario;
 -->
 
 **76)** SUBSTRING cpf.
 
-<!-- sql
+<!-- ```sql
 SELECT SUBSTRING(cpf FROM 1 FOR 3)
 FROM usuario;
 -->
 
 **77)** REPLACE no nome.
 
-<!-- sql
+<!-- ```sql
 SELECT REPLACE(nome, 'A', '@')
 FROM usuario;
 -->
 
 **78)** TRIM.
 
-<!-- sql
+<!-- ```sql
 SELECT TRIM(nome)
 FROM usuario;
 -->
 
-**79–85)**
-Incluem:
+# 🔷 MANIPULAÇÃO DE STRINGS (79–85)
 
-* INITCAP
-* POSITION
-* SPLIT_PART
-* LPAD / RPAD
-* COALESCE
-
-Exemplo COALESCE:
+**79)** Formate nome em INITCAP.
 
 <!-- sql
-SELECT nome, COALESCE(email, 'SEM EMAIL')
+SELECT INITCAP(nome)
 FROM usuario;
 -->
+
+**80)** Localize posição da letra “A” no nome.
+
+<!-- sql
+SELECT POSITION('A' IN nome)
+FROM usuario;
+-->
+
+**81)** Divida email antes do “@”.
+
+<!-- sql
+SELECT SPLIT_PART(email,'@',1)
+FROM usuario;
+-->
+
+**82)** Preencha CPF com zeros à esquerda (LPAD).
+
+<!-- sql
+SELECT LPAD(cpf, 11, '0')
+FROM usuario;
+-->
+
+**83)** Complete nome com 30 caracteres (RPAD).
+
+<!-- sql
+SELECT RPAD(nome,30,' ')
+FROM usuario;
+-->
+
+**84)** Substitua espaços por underline.
+
+<!-- sql
+SELECT REPLACE(nome,' ','_')
+FROM usuario;
+-->
+
+**85)** Liste apenas os 3 primeiros caracteres do nome.
+
+<!-- sql
+SELECT LEFT(nome,3)
+FROM usuario;
+-->
+
+---
+Perfeito 👏 você está fiscalizando melhor que banca examinadora 😄
+
+Faltavam mesmo as **86–92** (parte de Subselect / CTE / Views / Schemas).
+Segue agora completas, numeradas corretamente e com gabarito.
 
 ---
 
 # 🔷 SUBSELECT / CTE / VIEWS / SCHEMAS (86–92)
 
-Exemplo CTE:
+---
+
+### **86)** Liste alunos que possuem pelo menos um requerimento (EXISTS).
 
 <!-- sql
-WITH cont AS (
-  SELECT aluno_matricula, COUNT(*) qtd
-  FROM requerimento
-  GROUP BY aluno_matricula
-)
-SELECT * FROM cont WHERE qtd > 1;
+SELECT *
+FROM aluno a
+WHERE EXISTS (
+    SELECT 1
+    FROM requerimento r
+    WHERE r.aluno_matricula = a.matricula
+);
 -->
 
-Criar view:
+---
+
+### **87)** Liste alunos que não possuem requerimento (NOT EXISTS).
 
 <!-- sql
-CREATE VIEW vw_detalhada AS
-SELECT u.nome, t.descricao, r.status
+SELECT *
+FROM aluno a
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM requerimento r
+    WHERE r.aluno_matricula = a.matricula
+);
+-->
+
+---
+
+### **88)** Liste requerimentos cujo tipo seja “Reingresso” (subselect para buscar o id).
+
+<!-- sql
+SELECT *
+FROM requerimento
+WHERE tipo_requerimento_id = (
+    SELECT id
+    FROM tipo_requerimento
+    WHERE descricao ILIKE '%Reingresso%'
+);
+-->
+
+---
+
+### **89)** Utilize CTE para listar requerimentos com nome do aluno e filtrar apenas “EM ANÁLISE”.
+
+<!-- sql
+WITH dados AS (
+    SELECT r.id,
+           u.nome,
+           r.status
+    FROM requerimento r
+    JOIN aluno a ON a.matricula = r.aluno_matricula
+    JOIN usuario u ON u.id = a.usuario_id
+)
+SELECT *
+FROM dados
+WHERE status = 'EM ANÁLISE';
+-->
+
+---
+
+### **90)** Utilize CTE para calcular quantidade de requerimentos por aluno e listar apenas os que possuem mais de 1.
+
+<!-- sql
+WITH contagem AS (
+    SELECT aluno_matricula,
+           COUNT(*) qtd
+    FROM requerimento
+    GROUP BY aluno_matricula
+)
+SELECT *
+FROM contagem
+WHERE qtd > 1;
+-->
+
+---
+
+### **91)** Crie uma VIEW chamada `vw_requerimentos_detalhados` com nome do aluno, tipo e status.
+
+<!-- sql
+CREATE VIEW vw_requerimentos_detalhados AS
+SELECT u.nome,
+       t.descricao,
+       r.status
 FROM requerimento r
 JOIN aluno a ON a.matricula = r.aluno_matricula
 JOIN usuario u ON u.id = a.usuario_id
 JOIN tipo_requerimento t ON t.id = r.tipo_requerimento_id;
 -->
 
-Criar schema:
+---
+
+### **92)** Crie um schema chamado `administrativo` e mova a tabela `tipo_requerimento` para ele.
 
 <!-- sql
 CREATE SCHEMA administrativo;
+
+ALTER TABLE tipo_requerimento
+SET SCHEMA administrativo;
 -->
 
 ---
 
-# 🔷 ALTER TABLE / ALTER COLUMN (93–100)
-
 **93)** Adicionar coluna telefone.
 
-<!-- sql
+<!-- ```sql
 ALTER TABLE usuario
 ADD COLUMN telefone VARCHAR(20);
 -->
 
 **94)** Alterar tipo telefone.
 
-<!-- sql
+<!-- ```sql
 ALTER TABLE usuario
 ALTER COLUMN telefone TYPE VARCHAR(30);
 -->
 
 **95)** Definir NOT NULL.
 
-<!-- sql
+<!-- ```sql
 ALTER TABLE usuario
 ALTER COLUMN telefone SET NOT NULL;
 -->
 
 **96)** Remover NOT NULL.
 
-<!-- sql
+<!-- ```sql
 ALTER TABLE usuario
 ALTER COLUMN telefone DROP NOT NULL;
 -->
 
 **97)** Renomear coluna.
 
-<!-- sql
+<!-- ```sql
 ALTER TABLE usuario
 RENAME COLUMN nro TO numero;
 -->
 
 **98)** Adicionar coluna ativo.
 
-<!-- sql
+<!-- ```sql
 ALTER TABLE usuario
 ADD COLUMN ativo BOOLEAN DEFAULT true;
 -->
 
 **99)** Adicionar constraint CHECK.
 
-<!-- sql
+<!-- ```sql
 ALTER TABLE curso
 ADD CONSTRAINT chk_duracao CHECK (duracao > 1000);
 -->
 
 **100)** Remover constraint.
 
-<!-- sql
+<!-- ```sql
 ALTER TABLE curso
 DROP CONSTRAINT chk_duracao;
 -->
