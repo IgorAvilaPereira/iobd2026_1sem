@@ -2,7 +2,7 @@
 
 **1)** Liste matrícula e nome do aluno (INNER JOIN).
 
-<!-- ```sql
+<!-- <!-- ```sql
 SELECT a.matricula, u.nome
 FROM aluno a
 INNER JOIN usuario u ON u.id = a.usuario_id;
@@ -10,7 +10,7 @@ INNER JOIN usuario u ON u.id = a.usuario_id;
 
 **2)** Mesmo exercício usando `USING`.
 
-<!-- ```sql
+<!-- <!-- ```sql
 SELECT a.matricula, u.nome
 FROM aluno a
 JOIN usuario u USING (id);
@@ -20,7 +20,7 @@ JOIN usuario u USING (id);
 
 **3)** Liste alunos e curso.
 
-<!-- ```sql
+<!-- <!-- ```sql
 SELECT u.nome, c.nome
 FROM aluno a
 JOIN usuario u ON u.id = a.usuario_id
@@ -29,7 +29,7 @@ JOIN curso c ON c.id = a.curso_id;
 
 **4)** Liste requerimentos com tipo (INNER JOIN).
 
-<!-- ```sql
+<!-- <!-- ```sql
 SELECT r.id, t.descricao
 FROM requerimento r
 JOIN tipo_requerimento t ON t.id = r.tipo_requerimento_id;
@@ -37,7 +37,7 @@ JOIN tipo_requerimento t ON t.id = r.tipo_requerimento_id;
 
 **5)** LEFT JOIN alunos e requerimentos.
 
-<!-- ```sql
+<!-- <!-- ```sql
 SELECT a.matricula, r.id
 FROM aluno a
 LEFT JOIN requerimento r ON r.aluno_matricula = a.matricula;
@@ -45,7 +45,7 @@ LEFT JOIN requerimento r ON r.aluno_matricula = a.matricula;
 
 **6)** Liste alunos sem requerimento (LEFT + IS NULL).
 
-<!-- ```sql
+<!-- <!-- ```sql
 SELECT a.matricula
 FROM aluno a
 LEFT JOIN requerimento r ON r.aluno_matricula = a.matricula
@@ -54,7 +54,7 @@ WHERE r.id IS NULL;
 
 **7)** RIGHT JOIN requerimentos e anexos.
 
-<!-- ```sql
+<!-- <!-- ```sql
 SELECT r.id, an.id
 FROM requerimento r
 RIGHT JOIN anexo an ON an.requerimento_id = r.id;
@@ -62,7 +62,7 @@ RIGHT JOIN anexo an ON an.requerimento_id = r.id;
 
 **8)** FULL JOIN aluno e requerimento.
 
-<!-- ```sql
+<!-- <!-- ```sql
 SELECT a.matricula, r.id
 FROM aluno a
 FULL JOIN requerimento r ON r.aluno_matricula = a.matricula;
@@ -70,7 +70,7 @@ FULL JOIN requerimento r ON r.aluno_matricula = a.matricula;
 
 **9)** Tipos nunca solicitados (LEFT).
 
-<!-- ```sql
+<!-- <!-- ```sql
 SELECT t.descricao
 FROM tipo_requerimento t
 LEFT JOIN requerimento r ON r.tipo_requerimento_id = t.id
@@ -79,7 +79,7 @@ WHERE r.id IS NULL;
 
 **10)** Requerimentos com nome do aluno e tipo.
 
-<!-- ```sql
+<!-- <!-- ```sql
 SELECT u.nome, t.descricao, r.status
 FROM requerimento r
 JOIN aluno a ON a.matricula = r.aluno_matricula
@@ -185,7 +185,7 @@ USING (tipo_requerimento_id);
 
 **36)** Quantidade de requerimentos por status.
 
-<!-- ```sql
+<!-- <!-- ```sql
 SELECT status, COUNT(*)
 FROM requerimento
 GROUP BY status;
@@ -193,7 +193,7 @@ GROUP BY status;
 
 **37)** Tipos com mais de 1 ocorrência.
 
-<!-- ```sql
+<!-- <!-- ```sql
 SELECT tipo_requerimento_id, COUNT(*)
 FROM requerimento
 GROUP BY tipo_requerimento_id
@@ -202,7 +202,7 @@ HAVING COUNT(*) > 1;
 
 **38)** Requerimentos por aluno.
 
-<!-- ```sql
+<!-- <!-- ```sql
 SELECT aluno_matricula, COUNT(*)
 FROM requerimento
 GROUP BY aluno_matricula;
@@ -210,7 +210,7 @@ GROUP BY aluno_matricula;
 
 **39)** Ano de abertura + contagem.
 
-<!-- ```sql
+<!-- <!-- ```sql
 SELECT EXTRACT(YEAR FROM data_hora_abertura) ano,
 COUNT(*)
 FROM requerimento
@@ -219,7 +219,7 @@ GROUP BY ano;
 
 **40)** Mês atual.
 
-<!-- ```sql
+<!-- <!-- ```sql
 SELECT *
 FROM requerimento
 WHERE EXTRACT(MONTH FROM data_hora_abertura) =
@@ -228,14 +228,14 @@ EXTRACT(MONTH FROM CURRENT_DATE);
 
 **41)** Média duração cursos.
 
-<!-- ```sql
+<!-- <!-- ```sql
 SELECT AVG(duracao)
 FROM curso;
 -->
 
 **42)** Cursos acima da média.
 
-<!-- ```sql
+<!-- <!-- ```sql
 SELECT *
 FROM curso
 WHERE duracao > (SELECT AVG(duracao) FROM curso);
@@ -373,7 +373,7 @@ HAVING COUNT(DISTINCT EXTRACT(YEAR FROM data_hora_abertura)) > 1;
 
 **56)** Requerimentos de hoje.
 
-<!-- ```sql
+<!-- <!-- ```sql
 SELECT *
 FROM requerimento
 WHERE DATE(data_hora_abertura) = CURRENT_DATE;
@@ -381,7 +381,7 @@ WHERE DATE(data_hora_abertura) = CURRENT_DATE;
 
 **57)** Diferença em dias.
 
-<!-- ```sql
+<!-- <!-- ```sql
 SELECT id,
 (data_hora_encerramento - data_hora_abertura) AS dias
 FROM requerimento;
@@ -389,7 +389,7 @@ FROM requerimento;
 
 **58)** Requerimentos últimos 30 dias.
 
-<!-- ```sql
+<!-- <!-- ```sql
 SELECT *
 FROM requerimento
 WHERE data_hora_abertura >= CURRENT_DATE - INTERVAL '30 days';
@@ -397,26 +397,126 @@ WHERE data_hora_abertura >= CURRENT_DATE - INTERVAL '30 days';
 
 **59)** Extrair dia da semana.
 
-<!-- ```sql
+<!-- <!-- ```sql
 SELECT EXTRACT(DOW FROM data_hora_abertura)
 FROM requerimento;
 -->
 
 **60)** Idade do usuário.
 
-<!-- ```sql
+<!-- <!-- ```sql
 SELECT nome,
 EXTRACT(YEAR FROM AGE(data_nascimento))
 FROM usuario;
 -->
 
 
+# 🔷 MANIPULAÇÃO DE DATAS (61–70)
+
+**61)** Liste requerimentos abertos nos últimos 7 dias.
+
+<!-- ```sql
+SELECT *
+FROM requerimento
+WHERE data_hora_abertura >= CURRENT_DATE - INTERVAL '7 days';
+-->
+
+**62)** Liste requerimentos abertos no ano atual.
+
+<!-- ```sql
+SELECT *
+FROM requerimento
+WHERE EXTRACT(YEAR FROM data_hora_abertura) =
+      EXTRACT(YEAR FROM CURRENT_DATE);
+-->
+
+
+**63)** Liste requerimentos abertos no mês atual.
+
+<!-- ```sql
+SELECT *
+FROM requerimento
+WHERE EXTRACT(MONTH FROM data_hora_abertura) =
+      EXTRACT(MONTH FROM CURRENT_DATE)
+AND EXTRACT(YEAR FROM data_hora_abertura) =
+      EXTRACT(YEAR FROM CURRENT_DATE);
+-->
+
+ **64)** Liste requerimentos e mostre apenas a data (sem hora).
+
+<!-- ```sql
+SELECT id,
+       DATE(data_hora_abertura) AS data_abertura
+FROM requerimento;
+-->
+
+ **65)** Liste requerimentos e calcule o tempo em dias até o encerramento.
+
+<!-- ```sql
+SELECT id,
+       (data_hora_encerramento::date - data_hora_abertura::date) AS dias
+FROM requerimento
+WHERE data_hora_encerramento IS NOT NULL;
+-->
+
+
+
+**66)** Liste requerimentos mostrando dia da semana da abertura.
+
+<!-- ```sql
+SELECT id,
+       EXTRACT(DOW FROM data_hora_abertura) AS dia_semana
+FROM requerimento;
+-->
+
+ **67)** Liste requerimentos formatando a data no padrão DD/MM/YYYY.
+
+<!-- ```sql
+SELECT id,
+       TO_CHAR(data_hora_abertura, 'DD/MM/YYYY') AS data_formatada
+FROM requerimento;
+-->
+
+ **68)** Liste usuários mostrando idade em anos completos.
+
+<!-- ```sql
+SELECT nome,
+       EXTRACT(YEAR FROM AGE(data_nascimento)) AS idade
+FROM usuario
+WHERE data_nascimento IS NOT NULL;
+```
+
+--> **69)** Liste requerimentos abertos há mais de 30 dias e ainda “EM ANÁLISE”.
+
+<!-- ```sql
+SELECT *
+FROM requerimento
+WHERE status = 'EM ANÁLISE'
+AND data_hora_abertura <= CURRENT_DATE - INTERVAL '30 days';
+-->
+
+
+
+**70)** Liste o primeiro e o último requerimento aberto (mais antigo e mais recente).
+
+<!-- ```sql
+SELECT *
+FROM requerimento
+ORDER BY data_hora_abertura ASC
+LIMIT 1;
+
+SELECT *
+FROM requerimento
+ORDER BY data_hora_abertura DESC
+LIMIT 1;
+```
+-->
 
 # 🔷 MANIPULAÇÃO DE STRINGS (71–85)
 
 **71)** Buscar nome com ILIKE.
 
-<!-- ```sql
+<!-- <!-- ```sql
 SELECT *
 FROM usuario
 WHERE nome ILIKE '%igor%';
@@ -424,49 +524,49 @@ WHERE nome ILIKE '%igor%';
 
 **72)** Uppercase.
 
-<!-- ```sql
+<!-- <!-- ```sql
 SELECT UPPER(nome)
 FROM usuario;
 -->
 
 **73)** Lowercase.
 
-<!-- ```sql
+<!-- <!-- ```sql
 SELECT LOWER(nome)
 FROM usuario;
 -->
 
 **74)** Tamanho do nome.
 
-<!-- ```sql
+<!-- <!-- ```sql
 SELECT nome, LENGTH(nome)
 FROM usuario;
 -->
 
 **75)** Concatenar nome + email.
 
-<!-- ```sql
+<!-- <!-- ```sql
 SELECT nome || ' - ' || email
 FROM usuario;
 -->
 
 **76)** SUBSTRING cpf.
 
-<!-- ```sql
+<!-- <!-- ```sql
 SELECT SUBSTRING(cpf FROM 1 FOR 3)
 FROM usuario;
 -->
 
 **77)** REPLACE no nome.
 
-<!-- ```sql
+<!-- <!-- ```sql
 SELECT REPLACE(nome, 'A', '@')
 FROM usuario;
 -->
 
 **78)** TRIM.
 
-<!-- ```sql
+<!-- <!-- ```sql
 SELECT TRIM(nome)
 FROM usuario;
 -->
@@ -632,56 +732,56 @@ SET SCHEMA administrativo;
 
 **93)** Adicionar coluna telefone.
 
-<!-- ```sql
+<!-- <!-- ```sql
 ALTER TABLE usuario
 ADD COLUMN telefone VARCHAR(20);
 -->
 
 **94)** Alterar tipo telefone.
 
-<!-- ```sql
+<!-- <!-- ```sql
 ALTER TABLE usuario
 ALTER COLUMN telefone TYPE VARCHAR(30);
 -->
 
 **95)** Definir NOT NULL.
 
-<!-- ```sql
+<!-- <!-- ```sql
 ALTER TABLE usuario
 ALTER COLUMN telefone SET NOT NULL;
 -->
 
 **96)** Remover NOT NULL.
 
-<!-- ```sql
+<!-- <!-- ```sql
 ALTER TABLE usuario
 ALTER COLUMN telefone DROP NOT NULL;
 -->
 
 **97)** Renomear coluna.
 
-<!-- ```sql
+<!-- <!-- ```sql
 ALTER TABLE usuario
 RENAME COLUMN nro TO numero;
 -->
 
 **98)** Adicionar coluna ativo.
 
-<!-- ```sql
+<!-- <!-- ```sql
 ALTER TABLE usuario
 ADD COLUMN ativo BOOLEAN DEFAULT true;
 -->
 
 **99)** Adicionar constraint CHECK.
 
-<!-- ```sql
+<!-- <!-- ```sql
 ALTER TABLE curso
 ADD CONSTRAINT chk_duracao CHECK (duracao > 1000);
 -->
 
 **100)** Remover constraint.
 
-<!-- ```sql
+<!-- <!-- ```sql
 ALTER TABLE curso
 DROP CONSTRAINT chk_duracao;
 -->
