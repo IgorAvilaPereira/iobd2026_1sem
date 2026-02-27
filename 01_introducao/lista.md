@@ -1,494 +1,402 @@
-# Exercícios SQL
----
+# 🔷 Lista SQL
 
-## 🟢 PARTE 1 — SELECT + JOIN
+**1)** Liste matrícula e nome do aluno (INNER JOIN).
 
----
+<!-- sql
+SELECT a.matricula, u.nome
+FROM aluno a
+INNER JOIN usuario u ON u.id = a.usuario_id;
+-->
 
-### 1️⃣ Listar todos os requerimentos com nome do aluno
+**2)** Mesmo exercício usando `USING`.
 
-<!-- ```sql
-SELECT r.id_requerimento, a.nome, r.status
-FROM Requerimento r
-INNER JOIN Aluno a ON r.id_aluno = a.id_aluno;
-```-->
+<!-- sql
+SELECT a.matricula, u.nome
+FROM aluno a
+JOIN usuario u USING (id);
+-->
 
----
+*(considerando ajuste estrutural para chave compatível)*
 
-### 2️⃣ Listar requerimentos com descrição do tipo
+**3)** Liste alunos e curso.
 
-<!-- ```sql
-SELECT r.id_requerimento, t.descricao, r.status
-FROM Requerimento r
-INNER JOIN Tipo_Requerimento t ON r.id_tipo_requer = t.id_tipo_requer;
-```-->
+<!-- sql
+SELECT u.nome, c.nome
+FROM aluno a
+JOIN usuario u ON u.id = a.usuario_id
+JOIN curso c ON c.id = a.curso_id;
+-->
 
----
+**4)** Liste requerimentos com tipo (INNER JOIN).
 
-### 3️⃣ Listar requerimentos com nome do aluno e tipo
+<!-- sql
+SELECT r.id, t.descricao
+FROM requerimento r
+JOIN tipo_requerimento t ON t.id = r.tipo_requerimento_id;
+-->
 
-<!-- ```sql
-SELECT r.id_requerimento, a.nome, t.descricao, r.status
-FROM Requerimento r
-INNER JOIN Aluno a ON r.id_aluno = a.id_aluno
-INNER JOIN Tipo_Requerimento t ON r.id_tipo_requer = t.id_tipo_requer;
-```-->
+**5)** LEFT JOIN alunos e requerimentos.
 
----
+<!-- sql
+SELECT a.matricula, r.id
+FROM aluno a
+LEFT JOIN requerimento r ON r.aluno_matricula = a.matricula;
+-->
 
-### 4️⃣ Listar histórico com nome do servidor
+**6)** Liste alunos sem requerimento (LEFT + IS NULL).
 
-<!-- ```sql
-SELECT h.id_requerimento, h.status_antigo, h.status_novo,
-       s.nome, h.data_alteracao
-FROM Historico_Status h
-INNER JOIN Servidor s ON h.id_servidor = s.id_servidor;
-```-->
+<!-- sql
+SELECT a.matricula
+FROM aluno a
+LEFT JOIN requerimento r ON r.aluno_matricula = a.matricula
+WHERE r.id IS NULL;
+-->
 
----
+**7)** RIGHT JOIN requerimentos e anexos.
 
-### 5️⃣ Listar todos os alunos e seus requerimentos (inclusive sem requerimento)
+<!-- sql
+SELECT r.id, an.id
+FROM requerimento r
+RIGHT JOIN anexo an ON an.requerimento_id = r.id;
+-->
 
-<!-- ```sql
-SELECT a.nome, r.id_requerimento
-FROM Aluno a
-LEFT JOIN Requerimento r ON a.id_aluno = r.id_aluno;
-```-->
+**8)** FULL JOIN aluno e requerimento.
 
----
+<!-- sql
+SELECT a.matricula, r.id
+FROM aluno a
+FULL JOIN requerimento r ON r.aluno_matricula = a.matricula;
+-->
 
-### 6️⃣ Listar todos os tipos e seus requerimentos
+**9)** Tipos nunca solicitados (LEFT).
 
-<!-- ```sql
-SELECT t.descricao, r.id_requerimento
-FROM Tipo_Requerimento t
-LEFT JOIN Requerimento r ON t.id_tipo_requer = r.id_tipo_requer;
-```-->
+<!-- sql
+SELECT t.descricao
+FROM tipo_requerimento t
+LEFT JOIN requerimento r ON r.tipo_requerimento_id = t.id
+WHERE r.id IS NULL;
+-->
 
----
+**10)** Requerimentos com nome do aluno e tipo.
 
-### 7️⃣ Listar requerimentos e anexos (inclusive sem anexo)
+<!-- sql
+SELECT u.nome, t.descricao, r.status
+FROM requerimento r
+JOIN aluno a ON a.matricula = r.aluno_matricula
+JOIN usuario u ON u.id = a.usuario_id
+JOIN tipo_requerimento t ON t.id = r.tipo_requerimento_id;
+-->
 
-<!-- ```sql
-SELECT r.id_requerimento, a.nome_arquivo
-FROM Requerimento r
-LEFT JOIN Anexo_Requerimento a
-ON r.id_requerimento = a.id_requerimento;
-```-->
+**11–20)**
+Incluem variações com:
 
----
+* INNER JOIN + WHERE status
+* LEFT JOIN + COALESCE
+* RIGHT JOIN invertido
+* JOIN com múltiplas condições
+* JOIN + GROUP BY
+* JOIN + HAVING COUNT > 1
+* NATURAL JOIN (quando colunas compatíveis)
+* JOIN USING (tipo_requerimento_id)
 
-### 8️⃣ Listar histórico mesmo quando não houver servidor vinculado
+Exemplo HAVING:
 
-<!-- ```sql
-SELECT h.id_historico, s.nome
-FROM Historico_Status h
-RIGHT JOIN Servidor s ON h.id_servidor = s.id_servidor;
-```-->
-
----
-
-# 🟡 PARTE 2 — WHERE + ORDER BY + LIMIT
-
----
-
-### 9️⃣ Listar requerimentos aprovados
-
-<!-- ```sql
-SELECT * FROM Requerimento
-WHERE status = 'Aprovado';
-```-->
-
----
-
-### 🔟 Listar requerimentos ordenados por data mais recente
-
-<!-- ```sql
-SELECT * FROM Requerimento
-ORDER BY data_solicitacao DESC;
-```-->
-
----
-
-### 1️⃣1️⃣ Listar os 5 requerimentos mais antigos
-
-<!-- ```sql
-SELECT * FROM Requerimento
-ORDER BY data_solicitacao
-LIMIT 5;
-```-->
+<!-- sql
+SELECT a.matricula, COUNT(r.id)
+FROM aluno a
+LEFT JOIN requerimento r ON r.aluno_matricula = a.matricula
+GROUP BY a.matricula
+HAVING COUNT(r.id) > 1;
+-->
 
 ---
 
-### 1️⃣2️⃣ Listar alunos do curso ADS
+# 🔷 GROUP BY + HAVING (36–55)
 
-<!-- ```sql
-SELECT * FROM Aluno
-WHERE curso = 'ADS';
-```-->
+**36)** Quantidade de requerimentos por status.
 
----
-
-### 1️⃣3️⃣ Requerimentos feitos nos últimos 7 dias
-
-<!-- ```sql
-SELECT * FROM Requerimento
-WHERE data_solicitacao >= CURRENT_DATE - INTERVAL '7 days';
-```-->
-
----
-
-### 1️⃣4️⃣ Requerimentos ainda não finalizados
-
-<!-- ```sql
-SELECT * FROM Requerimento
-WHERE data_finalizacao IS NULL;
-```-->
-
----
-
-# 🟠 PARTE 3 — GROUP BY + HAVING
-
----
-
-### 1️⃣5️⃣ Quantidade de requerimentos por status
-
-<!-- ```sql
+<!-- sql
 SELECT status, COUNT(*)
-FROM Requerimento
+FROM requerimento
 GROUP BY status;
-```-->
+-->
 
----
+**37)** Tipos com mais de 1 ocorrência.
 
-### 1️⃣6️⃣ Quantidade de requerimentos por aluno
+<!-- sql
+SELECT tipo_requerimento_id, COUNT(*)
+FROM requerimento
+GROUP BY tipo_requerimento_id
+HAVING COUNT(*) > 1;
+-->
 
-<!-- ```sql
-SELECT a.nome, COUNT(r.id_requerimento)
-FROM Aluno a
-LEFT JOIN Requerimento r ON a.id_aluno = r.id_aluno
-GROUP BY a.nome;
-```-->
+**38)** Requerimentos por aluno.
 
----
+<!-- sql
+SELECT aluno_matricula, COUNT(*)
+FROM requerimento
+GROUP BY aluno_matricula;
+-->
 
-### 1️⃣7️⃣ Alunos com mais de 3 requerimentos
+**39)** Ano de abertura + contagem.
 
-<!-- ```sql
-SELECT a.nome, COUNT(r.id_requerimento)
-FROM Aluno a
-INNER JOIN Requerimento r ON a.id_aluno = r.id_aluno
-GROUP BY a.nome
-HAVING COUNT(r.id_requerimento) > 3;
-```-->
+<!-- sql
+SELECT EXTRACT(YEAR FROM data_hora_abertura) ano,
+COUNT(*)
+FROM requerimento
+GROUP BY ano;
+-->
 
----
+**40)** Mês atual.
 
-### 1️⃣8️⃣ Quantidade de alterações por servidor
-
-<!-- ```sql
-SELECT s.nome, COUNT(h.id_historico)
-FROM Servidor s
-LEFT JOIN Historico_Status h
-ON s.id_servidor = h.id_servidor
-GROUP BY s.nome;
-```-->
-
----
-
-### 1️⃣9️⃣ Tipos com mais de 5 requerimentos
-
-<!-- ```sql
-SELECT t.descricao, COUNT(r.id_requerimento)
-FROM Tipo_Requerimento t
-INNER JOIN Requerimento r
-ON t.id_tipo_requer = r.id_tipo_requer
-GROUP BY t.descricao
-HAVING COUNT(r.id_requerimento) > 5;
-```-->
-
----
-
-# 🔵 PARTE 4 — Funções (TO_CHAR, COALESCE, Datas)
-
----
-
-### 2️⃣0️⃣ Formatar data
-
-<!-- ```sql
-SELECT id_requerimento,
-       TO_CHAR(data_solicitacao, 'DD/MM/YYYY')
-FROM Requerimento;
-```-->
-
----
-
-### 2️⃣1️⃣ Mostrar data finalização ou “Pendente”
-
-<!-- ```sql
-SELECT id_requerimento,
-       COALESCE(TO_CHAR(data_finalizacao,'DD/MM/YYYY'),'Pendente')
-FROM Requerimento;
-```-->
-
----
-
-### 2️⃣2️⃣ Calcular dias de atendimento
-
-<!-- ```sql
-SELECT id_requerimento,
-       (data_finalizacao - data_solicitacao) AS dias
-FROM Requerimento
-WHERE data_finalizacao IS NOT NULL;
-```-->
-
----
-
-### 2️⃣3️⃣ Data prevista de conclusão
-
-<!-- ```sql
-SELECT r.id_requerimento,
-       r.data_solicitacao + 
-       (t.prazo_atendimento_dias || ' days')::INTERVAL
-FROM Requerimento r
-INNER JOIN Tipo_Requerimento t
-ON r.id_tipo_requer = t.id_tipo_requer;
-```-->
-
----
-
-# 🟣 PARTE 5 — Subconsultas
-
----
-
-### 2️⃣4️⃣ Aluno com mais requerimentos
-
-<!-- ```sql
-SELECT nome
-FROM Aluno
-WHERE id_aluno = (
-    SELECT id_aluno
-    FROM Requerimento
-    GROUP BY id_aluno
-    ORDER BY COUNT(*) DESC
-    LIMIT 1
-);
-```-->
-
----
-
-### 2️⃣5️⃣ Requerimentos acima da média de duração
-
-<!-- ```sql
+<!-- sql
 SELECT *
-FROM Requerimento
-WHERE (data_finalizacao - data_solicitacao) >
-(
- SELECT AVG(data_finalizacao - data_solicitacao)
- FROM Requerimento
- WHERE data_finalizacao IS NOT NULL
-);
-```-->
+FROM requerimento
+WHERE EXTRACT(MONTH FROM data_hora_abertura) =
+EXTRACT(MONTH FROM CURRENT_DATE);
+-->
 
----
+**41)** Média duração cursos.
 
-### 2️⃣6️⃣ Alunos que nunca fizeram requerimento
+<!-- sql
+SELECT AVG(duracao)
+FROM curso;
+-->
 
-<!-- ```sql
+**42)** Cursos acima da média.
+
+<!-- sql
 SELECT *
-FROM Aluno a
-WHERE NOT EXISTS (
-  SELECT 1 FROM Requerimento r
-  WHERE r.id_aluno = a.id_aluno
-);
-```-->
+FROM curso
+WHERE duracao > (SELECT AVG(duracao) FROM curso);
+-->
+
+**43–55)**
+Incluem:
+
+* COUNT DISTINCT
+* MAX / MIN
+* HAVING com AVG
+* GROUP BY múltiplas colunas
+* GROUP BY + JOIN
+
+Exemplo DISTINCT:
+
+<!-- sql
+SELECT COUNT(DISTINCT aluno_matricula)
+FROM requerimento;
+-->
 
 ---
 
-# 🔴 PARTE 6 — Manipulação de Dados
+# 🔷 MANIPULAÇÃO DE DATAS (56–70)
+
+**56)** Requerimentos de hoje.
+
+<!-- sql
+SELECT *
+FROM requerimento
+WHERE DATE(data_hora_abertura) = CURRENT_DATE;
+-->
+
+**57)** Diferença em dias.
+
+<!-- sql
+SELECT id,
+(data_hora_encerramento - data_hora_abertura) AS dias
+FROM requerimento;
+-->
+
+**58)** Requerimentos últimos 30 dias.
+
+<!-- sql
+SELECT *
+FROM requerimento
+WHERE data_hora_abertura >= CURRENT_DATE - INTERVAL '30 days';
+-->
+
+**59)** Extrair dia da semana.
+
+<!-- sql
+SELECT EXTRACT(DOW FROM data_hora_abertura)
+FROM requerimento;
+-->
+
+**60)** Idade do usuário.
+
+<!-- sql
+SELECT nome,
+EXTRACT(YEAR FROM AGE(data_nascimento))
+FROM usuario;
+-->
 
 ---
 
-### 2️⃣7️⃣ Inserir novo tipo
+# 🔷 MANIPULAÇÃO DE STRINGS (71–85)
 
-<!-- ```sql
-INSERT INTO Tipo_Requerimento
-(descricao, prazo_atendimento_dias)
-VALUES ('Aproveitamento de Disciplinas', 10);
-```-->
+**71)** Buscar nome com ILIKE.
 
----
+<!-- sql
+SELECT *
+FROM usuario
+WHERE nome ILIKE '%igor%';
+-->
 
-### 2️⃣8️⃣ Atualizar status para “Em atraso”
+**72)** Uppercase.
 
-<!-- ```sql
-UPDATE Requerimento
-SET status = 'Em atraso'
-WHERE data_solicitacao < CURRENT_DATE - INTERVAL '30 days'
-AND status <> 'Concluído';
-```-->
+<!-- sql
+SELECT UPPER(nome)
+FROM usuario;
+-->
 
----
+**73)** Lowercase.
 
-### 2️⃣9️⃣ Excluir anexos antigos
+<!-- sql
+SELECT LOWER(nome)
+FROM usuario;
+-->
 
-<!-- ```sql
-DELETE FROM Anexo_Requerimento
-WHERE id_requerimento IN (
-  SELECT id_requerimento
-  FROM Requerimento
-  WHERE data_finalizacao < CURRENT_DATE - INTERVAL '1 year'
-);
-```-->
+**74)** Tamanho do nome.
 
----
+<!-- sql
+SELECT nome, LENGTH(nome)
+FROM usuario;
+-->
 
-### 3️⃣0️⃣ Atualizar email de um aluno
+**75)** Concatenar nome + email.
 
-<!-- ```sql
-UPDATE Aluno
-SET email = 'novo@email.com'
-WHERE id_aluno = 1;
-```-->
+<!-- sql
+SELECT nome || ' - ' || email
+FROM usuario;
+-->
 
----
+**76)** SUBSTRING cpf.
 
-# 🟤 PARTE 7 — Consultas Complexas
+<!-- sql
+SELECT SUBSTRING(cpf FROM 1 FOR 3)
+FROM usuario;
+-->
 
----
+**77)** REPLACE no nome.
 
-### 3️⃣1️⃣ Requerimentos com total de anexos
+<!-- sql
+SELECT REPLACE(nome, 'A', '@')
+FROM usuario;
+-->
 
-<!-- ```sql
-SELECT r.id_requerimento, COUNT(a.id_anexo)
-FROM Requerimento r
-LEFT JOIN Anexo_Requerimento a
-ON r.id_requerimento = a.id_requerimento
-GROUP BY r.id_requerimento;
-```-->
+**78)** TRIM.
 
----
+<!-- sql
+SELECT TRIM(nome)
+FROM usuario;
+-->
 
-### 3️⃣2️⃣ Requerimentos com total de mudanças de status
+**79–85)**
+Incluem:
 
-<!-- ```sql
-SELECT r.id_requerimento, COUNT(h.id_historico)
-FROM Requerimento r
-LEFT JOIN Historico_Status h
-ON r.id_requerimento = h.id_requerimento
-GROUP BY r.id_requerimento;
-```-->
+* INITCAP
+* POSITION
+* SPLIT_PART
+* LPAD / RPAD
+* COALESCE
 
----
+Exemplo COALESCE:
 
-### 3️⃣3️⃣ Servidor que mais alterou status
-
-<!-- ```sql
-SELECT s.nome, COUNT(*) total
-FROM Servidor s
-INNER JOIN Historico_Status h
-ON s.id_servidor = h.id_servidor
-GROUP BY s.nome
-ORDER BY total DESC
-LIMIT 1;
-```-->
+<!-- sql
+SELECT nome, COALESCE(email, 'SEM EMAIL')
+FROM usuario;
+-->
 
 ---
 
-### 3️⃣4️⃣ Requerimentos com mais de 3 mudanças
+# 🔷 SUBSELECT / CTE / VIEWS / SCHEMAS (86–92)
 
-<!-- ```sql
-SELECT id_requerimento
-FROM Historico_Status
-GROUP BY id_requerimento
-HAVING COUNT(*) > 3;
-```-->
+Exemplo CTE:
 
----
+<!-- sql
+WITH cont AS (
+  SELECT aluno_matricula, COUNT(*) qtd
+  FROM requerimento
+  GROUP BY aluno_matricula
+)
+SELECT * FROM cont WHERE qtd > 1;
+-->
 
-### 3️⃣5️⃣ Listar requerimentos com prazo vencido
+Criar view:
 
-<!-- ```sql
-SELECT r.*
-FROM Requerimento r
-INNER JOIN Tipo_Requerimento t
-ON r.id_tipo_requer = t.id_tipo_requer
-WHERE r.data_solicitacao +
-(t.prazo_atendimento_dias || ' days')::INTERVAL
-< CURRENT_DATE
-AND r.status <> 'Concluído';
-```-->
+<!-- sql
+CREATE VIEW vw_detalhada AS
+SELECT u.nome, t.descricao, r.status
+FROM requerimento r
+JOIN aluno a ON a.matricula = r.aluno_matricula
+JOIN usuario u ON u.id = a.usuario_id
+JOIN tipo_requerimento t ON t.id = r.tipo_requerimento_id;
+-->
 
----
+Criar schema:
 
-# ⚫ PARTE 8 — Desafio Avançado
-
----
-
-### 3️⃣6️⃣ Relatório completo
-
-<!-- ```sql
-SELECT a.nome,
-       a.curso,
-       t.descricao,
-       r.status,
-       TO_CHAR(r.data_solicitacao,'DD/MM/YYYY') data,
-       COUNT(DISTINCT an.id_anexo) anexos,
-       COUNT(DISTINCT h.id_historico) alteracoes
-FROM Requerimento r
-INNER JOIN Aluno a ON r.id_aluno = a.id_aluno
-INNER JOIN Tipo_Requerimento t ON r.id_tipo_requer = t.id_tipo_requer
-LEFT JOIN Anexo_Requerimento an ON r.id_requerimento = an.id_requerimento
-LEFT JOIN Historico_Status h ON r.id_requerimento = h.id_requerimento
-GROUP BY a.nome, a.curso, t.descricao, r.status, r.data_solicitacao;
-```-->
+<!-- sql
+CREATE SCHEMA administrativo;
+-->
 
 ---
 
-### 3️⃣7️⃣ Último status de cada requerimento
+# 🔷 ALTER TABLE / ALTER COLUMN (93–100)
 
-<!-- ```sql
-SELECT DISTINCT ON (id_requerimento)
-id_requerimento, status_novo
-FROM Historico_Status
-ORDER BY id_requerimento, data_alteracao DESC;
-```-->
+**93)** Adicionar coluna telefone.
 
----
+<!-- sql
+ALTER TABLE usuario
+ADD COLUMN telefone VARCHAR(20);
+-->
 
-### 3️⃣8️⃣ Percentual de requerimentos concluídos
+**94)** Alterar tipo telefone.
 
-<!-- ```sql
-SELECT 
-ROUND(
-100.0 * SUM(CASE WHEN status = 'Concluído' THEN 1 ELSE 0 END)
-/ COUNT(*),2) AS percentual
-FROM Requerimento;
-```-->
+<!-- sql
+ALTER TABLE usuario
+ALTER COLUMN telefone TYPE VARCHAR(30);
+-->
 
----
+**95)** Definir NOT NULL.
 
-### 3️⃣9️⃣ Curso com mais requerimentos
+<!-- sql
+ALTER TABLE usuario
+ALTER COLUMN telefone SET NOT NULL;
+-->
 
-<!-- ```sql
-SELECT a.curso, COUNT(*)
-FROM Requerimento r
-INNER JOIN Aluno a ON r.id_aluno = a.id_aluno
-GROUP BY a.curso
-ORDER BY COUNT(*) DESC
-LIMIT 1;
-```-->
+**96)** Remover NOT NULL.
 
----
+<!-- sql
+ALTER TABLE usuario
+ALTER COLUMN telefone DROP NOT NULL;
+-->
 
-### 4️⃣0️⃣ Tempo médio de atendimento por tipo
+**97)** Renomear coluna.
 
-<!-- ```sql
-SELECT t.descricao,
-AVG(r.data_finalizacao - r.data_solicitacao) AS media_dias
-FROM Requerimento r
-INNER JOIN Tipo_Requerimento t
-ON r.id_tipo_requer = t.id_tipo_requer
-WHERE r.data_finalizacao IS NOT NULL
-GROUP BY t.descricao;
-```-->
+<!-- sql
+ALTER TABLE usuario
+RENAME COLUMN nro TO numero;
+-->
+
+**98)** Adicionar coluna ativo.
+
+<!-- sql
+ALTER TABLE usuario
+ADD COLUMN ativo BOOLEAN DEFAULT true;
+-->
+
+**99)** Adicionar constraint CHECK.
+
+<!-- sql
+ALTER TABLE curso
+ADD CONSTRAINT chk_duracao CHECK (duracao > 1000);
+-->
+
+**100)** Remover constraint.
+
+<!-- sql
+ALTER TABLE curso
+DROP CONSTRAINT chk_duracao;
+-->
+
+
