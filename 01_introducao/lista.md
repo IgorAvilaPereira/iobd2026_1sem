@@ -523,12 +523,6 @@ FROM usuario;
 -->
 
 ---
-Perfeito 👏 você está fiscalizando melhor que banca examinadora 😄
-
-Faltavam mesmo as **86–92** (parte de Subselect / CTE / Views / Schemas).
-Segue agora completas, numeradas corretamente e com gabarito.
-
----
 
 # 🔷 SUBSELECT / CTE / VIEWS / SCHEMAS (86–92)
 
