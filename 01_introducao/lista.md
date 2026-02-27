@@ -179,7 +179,7 @@ JOIN tipo_requerimento t
 USING (tipo_requerimento_id);
 -->
 
----
+
 
 # 🔷 GROUP BY + HAVING (36–55)
 
@@ -367,7 +367,7 @@ HAVING COUNT(DISTINCT EXTRACT(YEAR FROM data_hora_abertura)) > 1;
 -->
 
 
----
+
 
 # 🔷 MANIPULAÇÃO DE DATAS (56–70)
 
@@ -410,7 +410,7 @@ EXTRACT(YEAR FROM AGE(data_nascimento))
 FROM usuario;
 -->
 
----
+
 
 # 🔷 MANIPULAÇÃO DE STRINGS (71–85)
 
@@ -522,11 +522,11 @@ SELECT LEFT(nome,3)
 FROM usuario;
 -->
 
----
+
 
 # 🔷 SUBSELECT / CTE / VIEWS / SCHEMAS (86–92)
 
----
+
 
  **86)** Liste alunos que possuem pelo menos um requerimento (EXISTS).
 
@@ -540,7 +540,7 @@ WHERE EXISTS (
 );
 -->
 
----
+
 
  **87)** Liste alunos que não possuem requerimento (NOT EXISTS).
 
@@ -554,7 +554,7 @@ WHERE NOT EXISTS (
 );
 -->
 
----
+
 
  **88)** Liste requerimentos cujo tipo seja “Reingresso” (subselect para buscar o id).
 
@@ -568,7 +568,7 @@ WHERE tipo_requerimento_id = (
 );
 -->
 
----
+
 
  **89)** Utilize CTE para listar requerimentos com nome do aluno e filtrar apenas “EM ANÁLISE”.
 
@@ -586,7 +586,7 @@ FROM dados
 WHERE status = 'EM ANÁLISE';
 -->
 
----
+
 
  **90)** Utilize CTE para calcular quantidade de requerimentos por aluno e listar apenas os que possuem mais de 1.
 
@@ -602,7 +602,7 @@ FROM contagem
 WHERE qtd > 1;
 -->
 
----
+
 
  **91)** Crie uma VIEW chamada `vw_requerimentos_detalhados` com nome do aluno, tipo e status.
 
@@ -617,7 +617,7 @@ JOIN usuario u ON u.id = a.usuario_id
 JOIN tipo_requerimento t ON t.id = r.tipo_requerimento_id;
 -->
 
----
+
 
  **92)** Crie um schema chamado `administrativo` e mova a tabela `tipo_requerimento` para ele.
 
@@ -628,7 +628,7 @@ ALTER TABLE tipo_requerimento
 SET SCHEMA administrativo;
 -->
 
----
+
 
 **93)** Adicionar coluna telefone.
 
