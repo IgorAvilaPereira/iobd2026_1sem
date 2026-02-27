@@ -528,7 +528,7 @@ FROM usuario;
 
 ---
 
-### **86)** Liste alunos que possuem pelo menos um requerimento (EXISTS).
+ **86)** Liste alunos que possuem pelo menos um requerimento (EXISTS).
 
 <!-- sql
 SELECT *
@@ -542,7 +542,7 @@ WHERE EXISTS (
 
 ---
 
-### **87)** Liste alunos que não possuem requerimento (NOT EXISTS).
+ **87)** Liste alunos que não possuem requerimento (NOT EXISTS).
 
 <!-- sql
 SELECT *
@@ -556,7 +556,7 @@ WHERE NOT EXISTS (
 
 ---
 
-### **88)** Liste requerimentos cujo tipo seja “Reingresso” (subselect para buscar o id).
+ **88)** Liste requerimentos cujo tipo seja “Reingresso” (subselect para buscar o id).
 
 <!-- sql
 SELECT *
@@ -570,7 +570,7 @@ WHERE tipo_requerimento_id = (
 
 ---
 
-### **89)** Utilize CTE para listar requerimentos com nome do aluno e filtrar apenas “EM ANÁLISE”.
+ **89)** Utilize CTE para listar requerimentos com nome do aluno e filtrar apenas “EM ANÁLISE”.
 
 <!-- sql
 WITH dados AS (
@@ -588,7 +588,7 @@ WHERE status = 'EM ANÁLISE';
 
 ---
 
-### **90)** Utilize CTE para calcular quantidade de requerimentos por aluno e listar apenas os que possuem mais de 1.
+ **90)** Utilize CTE para calcular quantidade de requerimentos por aluno e listar apenas os que possuem mais de 1.
 
 <!-- sql
 WITH contagem AS (
@@ -604,7 +604,7 @@ WHERE qtd > 1;
 
 ---
 
-### **91)** Crie uma VIEW chamada `vw_requerimentos_detalhados` com nome do aluno, tipo e status.
+ **91)** Crie uma VIEW chamada `vw_requerimentos_detalhados` com nome do aluno, tipo e status.
 
 <!-- sql
 CREATE VIEW vw_requerimentos_detalhados AS
@@ -619,7 +619,7 @@ JOIN tipo_requerimento t ON t.id = r.tipo_requerimento_id;
 
 ---
 
-### **92)** Crie um schema chamado `administrativo` e mova a tabela `tipo_requerimento` para ele.
+ **92)** Crie um schema chamado `administrativo` e mova a tabela `tipo_requerimento` para ele.
 
 <!-- sql
 CREATE SCHEMA administrativo;
