@@ -12,3 +12,6 @@
 [teste](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./01_introducao/teste) <br>
 [teste_jdbc](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./01_introducao/teste_jdbc) <br>
 [videos](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./01_introducao/videos) <br>
+## [./02_exercicios_join](https://github.com/IgorAvilaPereira/iobd2026_1sem/tree/main/./02_exercicios_join) <br>
+<br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/iobd2026_1sem/tree/main/02_exercicios_join) <br><br>
+&nbsp;
