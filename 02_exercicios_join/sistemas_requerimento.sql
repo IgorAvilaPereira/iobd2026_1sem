@@ -91,6 +91,12 @@ INSERT INTO requerimento (aluno_matricula, tipo_requerimento_id) VALUES
 INSERT INTO requerimento (aluno_matricula, tipo_requerimento_id) VALUES
 ('1231231231', 18);
 
+INSERT INTO requerimento (aluno_matricula, tipo_requerimento_id) VALUES
+('1231231231', 1);
+
+INSERT INTO requerimento (aluno_matricula, tipo_requerimento_id) VALUES
+('1231231232', 1);
+
 CREATE TABLE anexo (
     id serial primary key,
     descricao text not null,
@@ -150,3 +156,11 @@ FROM
 
 -- 10)
 
+-- 11) SELECT * from usuario inner join aluno on (usuario.id = aluno.usuario_id) inner join requerimento on (aluno.matricula = requerimento.aluno_matricula) where requerimento.status = 'DEFERIDO';
+
+-- 11) CREATE VIEW qtde_requerimento_por_tipo AS SELECT tipo_requerimento.id, tipo_requerimento.descricao, count(requerimento.tipo_requerimento_id) FROM requerimento inner join tipo_requerimento on (requerimento.tipo_requerimento_id = tipo_requerimento.id) GROUP BY tipo_requerimento.id, tipo_requerimento.descricao, requerimento.tipo_requerimento_id;
+
+-- off-topic: group by / having
+-- SELECT tipo_requerimento.id, tipo_requerimento.descricao, count(requerimento.tipo_requerimento_id) FROM requerimento inner join tipo_requerimento on (requerimento.tipo_requerimento_id = tipo_requerimento.id) GROUP BY tipo_requerimento.id, tipo_requerimento.descricao, requerimento.tipo_requerimento_id having count(tipo_requerimento_id) >= 2;
+
+-- 14) SELECT aluno.matricula, count(requerimento.aluno_matricula) FROM aluno inner join requerimento on (aluno.matricula = requerimento.aluno_matricula) GROUP BY aluno.matricula, requerimento.aluno_matricula having count(requerimento.aluno_matricula) > 1;
