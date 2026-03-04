@@ -16,3 +16,4 @@
 <br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/iobd2026_1sem/tree/main/02_exercicios_join) <br><br>
 &nbsp;
 [sistemas_requerimento.sql](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./02_exercicios_join/sistemas_requerimento.sql) <br>
+[teoria.md](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./02_exercicios_join/teoria.md) <br>
