@@ -18,6 +18,7 @@
 [sistemas_requerimento.sql](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./02_exercicios_join/sistemas_requerimento.sql) <br>
 [teoria.md](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./02_exercicios_join/teoria.md) <br>
 ## [./03_exercicios_group_by](https://github.com/IgorAvilaPereira/iobd2026_1sem/tree/main/./03_exercicios_group_by) <br>
+[dao_jdbc.pdf](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./03_exercicios_group_by/dao_jdbc.pdf) <br>
 * https://github.com/IgorAvilaPereira/JavalinMustacheWithStaticFolder
 
 <br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/iobd2026_1sem/tree/main/03_exercicios_group_by) <br><br>
