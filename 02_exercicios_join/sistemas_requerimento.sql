@@ -132,6 +132,7 @@ SELECT aluno.matricula, requerimento.id FROM aluno LEFT JOIN requerimento on (al
 */
 -- select aluno.matricula from aluno where aluno.matricula not in (select requerimento.aluno_matricula from requerimento);
 
+-- materia_nova: operacoes com conjunto (except == subtrair)
 -- (SELECT matricula FROM aluno) EXCEPT (SELECT aluno_matricula FROM requerimento);
 
 -- 7
@@ -140,6 +141,7 @@ SELECT aluno.matricula, requerimento.id FROM aluno LEFT JOIN requerimento on (al
 
 -- SELECT requerimento.id, coalesce(anexo.descricao, 'sem descricao') as descricao FROM requerimento left join anexo on (requerimento.id = anexo.requerimento_id);
 
+-- materia_nova: case_when
 SELECT requerimento.id, 
     case
         when anexo.descricao is null then 'sem descricao'
@@ -150,7 +152,7 @@ FROM
     
 -- 8) SELECT aluno.matricula, requerimento.id FROM aluno FULL JOIN requerimento on (aluno.matricula = requerimento.aluno_matricula)
 
--- 9)
+-- 9) materia_nova: subselect
 -- SELECT * FROM tipo_requerimento WHERE id NOT in(SELECT tipo_requerimento_id FROM requerimento);
 -- 9)SELECT tipo_requerimento.descricao FROM tipo_requerimento LEFT JOIN requerimento on (tipo_requerimento.id = requerimento.tipo_requerimento_id) where requerimento.tipo_requerimento_id IS NULL;
 
@@ -158,9 +160,27 @@ FROM
 
 -- 11) SELECT * from usuario inner join aluno on (usuario.id = aluno.usuario_id) inner join requerimento on (aluno.matricula = requerimento.aluno_matricula) where requerimento.status = 'DEFERIDO';
 
+-- materia_nova: view
 -- 11) CREATE VIEW qtde_requerimento_por_tipo AS SELECT tipo_requerimento.id, tipo_requerimento.descricao, count(requerimento.tipo_requerimento_id) FROM requerimento inner join tipo_requerimento on (requerimento.tipo_requerimento_id = tipo_requerimento.id) GROUP BY tipo_requerimento.id, tipo_requerimento.descricao, requerimento.tipo_requerimento_id;
 
--- off-topic: group by / having
+-- materia_nova: group by / having
 -- SELECT tipo_requerimento.id, tipo_requerimento.descricao, count(requerimento.tipo_requerimento_id) FROM requerimento inner join tipo_requerimento on (requerimento.tipo_requerimento_id = tipo_requerimento.id) GROUP BY tipo_requerimento.id, tipo_requerimento.descricao, requerimento.tipo_requerimento_id having count(tipo_requerimento_id) >= 2;
 
 -- 14) SELECT aluno.matricula, count(requerimento.aluno_matricula) FROM aluno inner join requerimento on (aluno.matricula = requerimento.aluno_matricula) GROUP BY aluno.matricula, requerimento.aluno_matricula having count(requerimento.aluno_matricula) > 1;
+
+
+-- 15) SELECT requerimento.id, count(requerimento_id) as qtde FROM requerimento left join anexo on (requerimento.id = anexo.requerimento_id) group by requerimento.id, requerimento_id;
+
+INSERT INTO anexo (descricao, arquivo, requerimento_id) values ('DIPLOMA DO CURSO ANTERIOR', NULL, 1);
+
+-- materia_nova string_agg
+--SELECT requerimento.id, STRING_AGG(anexo.descricao, ',') as lista_de_anexos FROM requerimento inner join anexo on (requerimento.id = anexo.requerimento_id) group by requerimento.id;
+
+
+-- 16) Select usuario.id, usuario.nome, string_agg(curso.nome, ','), string_agg(aluno.matricula, ';') FROM usuario inner join aluno on usuario.id = aluno.usuario_id inner join curso on curso.id = aluno.curso_id group by usuario.id;
+
+-- 18) ja fiz
+
+-- 19) jump
+
+-- 20) 
