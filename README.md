@@ -27,4 +27,5 @@
 [sistemas_requerimento.sql](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./03_exercicios_group_by/sistemas_requerimento.sql) <br>
 [sql1.pdf](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./03_exercicios_group_by/sql1.pdf) <br>
 [sql2.pdf](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./03_exercicios_group_by/sql2.pdf) <br>
+[teoria.md](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./03_exercicios_group_by/teoria.md) <br>
 [sistema_requerimento](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./03_exercicios_group_by/sistema_requerimento) <br>
