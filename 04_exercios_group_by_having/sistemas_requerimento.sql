@@ -200,14 +200,14 @@ INSERT INTO anexo (descricao, arquivo, requerimento_id) values ('DIPLOMA DO CURS
 
 
 -- off-topic:  
-select 
-    extract(year from data_hora_abertura) as ano, 
-    case 
-        when extract(month from data_hora_abertura) = 3 then 'Março'
-        -- fazer para todos os meses.
-    end as mes, 
-    count(*) as qtde from requerimento 
-group by ano, mes; 
+--select 
+--    extract(year from data_hora_abertura) as ano, 
+--    case 
+--        when extract(month from data_hora_abertura) = 3 then 'Março'
+--        -- fazer para todos os meses.
+--    end as mes, 
+--    count(*) as qtde from requerimento 
+--group by ano, mes; 
 
 -- 40) fiz no off-topic
 
@@ -217,6 +217,10 @@ group by ano, mes;
 -- 42) select * from curso where duracao > (select cast(avg(duracao) as float) as media_horas_duracao from curso);
 
 -- materia nova by rogerio
-WITH tabela_media AS (select cast(avg(duracao) as float) as media from curso) select * from curso where duracao > (select media from tabela_media);
+--WITH tabela_media AS (select cast(avg(duracao) as float) as media from curso) select * from curso where duracao > (select media from tabela_media);
+
+ALTER TABLE curso ADD COLUMN ativo boolean DEFAULT true;
+
+
 
 
