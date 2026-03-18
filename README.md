@@ -39,3 +39,4 @@
 &nbsp;
 [sistemas_requerimento.sql](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./04_exercios_group_by_having/sistemas_requerimento.sql) <br>
 [trabalho1.md](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./04_exercios_group_by_having/trabalho1.md) <br>
+[sistema_requerimento](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./04_exercios_group_by_having/sistema_requerimento) <br>
