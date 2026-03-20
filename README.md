@@ -45,3 +45,5 @@
 <br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/iobd2026_1sem/tree/main/05_javalin_jdbc_dao) <br><br>
 &nbsp;
 [trabalho1.md](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./05_javalin_jdbc_dao/trabalho1.md) <br>
+## [./06_schemas](https://github.com/IgorAvilaPereira/iobd2026_1sem/tree/main/./06_schemas) <br>
+Schemas
