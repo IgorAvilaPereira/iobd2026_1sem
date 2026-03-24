@@ -240,6 +240,9 @@ ALTER TABLE curso ADD COLUMN ativo boolean DEFAULT true;
 
 -- select extract(year from data_hora_abertura) as ano, extract(month from data_hora_abertura) as mes, count(requerimento.id) as qtde from requerimento group by extract(year from data_hora_abertura), extract(month from data_hora_abertura);
 
--- select tipo_requerimento.descricao, count(*) as qtde from requerimento inner join tipo_requerimento on (requerimento.tipo_requerimento_id = tipo_requerimento.id) group by tipo_requerimento.descricao having count(*) >= 2;
+-- 49) select tipo_requerimento.descricao, count(*) as qtde from requerimento inner join tipo_requerimento on (requerimento.tipo_requerimento_id = tipo_requerimento.id) group by tipo_requerimento.descricao having count(*) >= 2;
+
+-- SELECT matricula from aluno order by random() limit 1;
+
 
 
