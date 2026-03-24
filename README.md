@@ -46,4 +46,6 @@
 &nbsp;
 [trabalho1.md](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./05_javalin_jdbc_dao/trabalho1.md) <br>
 ## [./06_schemas](https://github.com/IgorAvilaPereira/iobd2026_1sem/tree/main/./06_schemas) <br>
-Schemas
+* Distinct, Schemas, transações e etc.
+
+* Exists, IN e etc.
