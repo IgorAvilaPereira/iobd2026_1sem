@@ -49,3 +49,6 @@
 * Distinct, Schemas, transações e etc.
 
 * Exists, IN e etc.
+[sistemas_requerimentos.dia](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./06_schemas/sistemas_requerimentos.dia) <br>
+[sistemas_requerimento.sql](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./06_schemas/sistemas_requerimento.sql) <br>
+[sistema_requerimento](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./06_schemas/sistema_requerimento) <br>
