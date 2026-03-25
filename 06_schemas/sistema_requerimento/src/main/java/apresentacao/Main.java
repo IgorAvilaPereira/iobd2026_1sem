@@ -40,6 +40,7 @@ public class Main {
                 Map<String, Object> map = new HashMap<>();
                 // defino um apelido para a colecao de objetos de curso vindos do banco
                 map.put("vetCurso", new CursoDAO().listar());
+                map.put("teste", "oi!! igor paraninfo!");
                 // renderizo a pagina html encaminhando tb o map
                 ctx.render("/templates/index.html", map);
             });
