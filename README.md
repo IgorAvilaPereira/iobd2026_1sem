@@ -71,3 +71,6 @@ SELECT * FROM generate_series(
 [sistemas_requerimentos.dia](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./06_schemas/sistemas_requerimentos.dia) <br>
 [sistemas_requerimento.sql](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./06_schemas/sistemas_requerimento.sql) <br>
 [sistema_requerimento](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./06_schemas/sistema_requerimento) <br>
+## [./07_atividade_pratica](https://github.com/IgorAvilaPereira/iobd2026_1sem/tree/main/./07_atividade_pratica) <br>
+<br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/iobd2026_1sem/tree/main/07_atividade_pratica) <br><br>
+&nbsp;
