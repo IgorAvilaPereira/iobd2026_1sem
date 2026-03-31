@@ -44,7 +44,7 @@ data_devolucao
 
 ---
 
-# 🔷 PARTE 1 – SQL (2 pontos)
+# 🔷 PARTE 1 – SQL 
 
 ---
 
@@ -232,33 +232,5 @@ RelatorioDAO.java
 
 ---
 
-# ⏱️ Tempo de aula
-
-| Tempo  | Atividade                |
-| ------ | ------------------------ |
-| 45 min | SQL básico/intermediário |
-| 45 min | SQL avançado             |
-| 60 min | JDBC                     |
-| 30 min | testes                   |
 
 ---
-
-# 🎓 Resultado
-
-Essa versão:
-
-* mantém **baixo acoplamento**
-* aumenta **nível analítico**
-* evita exercícios repetitivos da lista original
-* força raciocínio real (não só copiar SQL)
-
----
-<!--
-Se quiser, posso montar também:
-
-✅ gabarito completo
-✅ versão com menos exercícios (caso a turma seja mais lenta)
-✅ versão com dados fake para rodar direto
-
-Essa aqui está **bem equilibrada para uma aula forte**.
--->
