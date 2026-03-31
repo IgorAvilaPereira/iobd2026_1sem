@@ -21,7 +21,6 @@ autor
 ```sql
 id
 livro_id
-codigo
 disponivel
 ```
 
