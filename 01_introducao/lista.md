@@ -484,9 +484,9 @@ SELECT nome,
        EXTRACT(YEAR FROM AGE(data_nascimento)) AS idade
 FROM usuario
 WHERE data_nascimento IS NOT NULL;
-```
+```--> 
 
---> **69)** Liste requerimentos abertos há mais de 30 dias e ainda “EM ANÁLISE”.
+**69)** Liste requerimentos abertos há mais de 30 dias e ainda “EM ANÁLISE”.
 
 <!-- ```sql
 SELECT *
