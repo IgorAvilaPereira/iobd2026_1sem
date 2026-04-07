@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adicionar usuario</title>
+
+<style>
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  padding: 40px;
+}
+
+/* título */
+.titulo{
+  text-align: center;
+  color: white;
+  margin-bottom: 30px;
+}
+
+/* card do form */
+.form-card{
+  background: white;
+  max-width: 500px;
+  margin: auto;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  animation: aparecer 0.6s ease;
+}
+
+@keyframes aparecer{
+  from{
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* labels */
+.form-card label{
+  font-weight: bold;
+  color: #444;
+  display: block;
+  margin-top: 15px;
+}
+
+/* inputs */
+.form-card input[type="text"],
+.form-card input[type="number"]{
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.form-card input:focus{
+  border-color: #667eea;
+  outline: none;
+  box-shadow: 0 0 5px rgba(102,126,234,0.5);
+}
+
+/* radio group */
+.radio-group{
+  margin-top: 10px;
+}
+
+.radio-group label{
+  font-weight: normal;
+  margin-right: 15px;
+}
+
+/* botão */
+.botao{
+  width: 100%;
+  margin-top: 25px;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  usuarior: pointer;
+  transition: 0.3s;
+}
+
+.botao:hover{
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+</style>
+<!-- <script>
+    function preenche_radio(){
+        var turno = "{{usuario.turno}}";
+        document.getElementById(turno).checked = true;
+        // alert(turno); 
+    }
+</script> -->
+</head>
+<body>
+
+<h1 class="titulo">Adicionar usuario</h1>
+
+<form class="form-card" action="/usuario/alterar" method="post">
+
+<label>Data Nascimento</label>
+<input type="date" name="data_nascimento" value="{{usuario.dataNascimento}}">
+
+<label>Nome</label>
+<input type="text" name="nome" value="{{usuario.nome}}">
+
+<label>cpf</label>
+<input type="text" name="cpf" value="{{usuario.cpf}}">
+
+<label>email</label>
+<input type="text" name="email" value="{{usuario.email}}">
+
+<label>cep</label>
+<input type="text" name="cep" value="{{usuario.cep}}">
+
+<label>rua</label>
+<input type="text" name="rua" value="{{usuario.rua}}">
+
+<label>complemento</label>
+<input type="text" name="complemento" value="{{usuario.complemento}}">
+
+<input type="hidden" name="id" value="{{usuario.id}}">
+
+<input class="botao" type="submit" value="Alterar">
+
+</form>
+
+</body>
+</html>
+

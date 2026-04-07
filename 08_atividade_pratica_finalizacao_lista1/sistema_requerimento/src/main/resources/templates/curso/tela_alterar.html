@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adicionar Curso</title>
+
+<style>
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  padding: 40px;
+}
+
+/* título */
+.titulo{
+  text-align: center;
+  color: white;
+  margin-bottom: 30px;
+}
+
+/* card do form */
+.form-card{
+  background: white;
+  max-width: 500px;
+  margin: auto;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  animation: aparecer 0.6s ease;
+}
+
+@keyframes aparecer{
+  from{
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* labels */
+.form-card label{
+  font-weight: bold;
+  color: #444;
+  display: block;
+  margin-top: 15px;
+}
+
+/* inputs */
+.form-card input[type="text"],
+.form-card input[type="number"]{
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.form-card input:focus{
+  border-color: #667eea;
+  outline: none;
+  box-shadow: 0 0 5px rgba(102,126,234,0.5);
+}
+
+/* radio group */
+.radio-group{
+  margin-top: 10px;
+}
+
+.radio-group label{
+  font-weight: normal;
+  margin-right: 15px;
+}
+
+/* botão */
+.botao{
+  width: 100%;
+  margin-top: 25px;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.botao:hover{
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+</style>
+<script>
+    function preenche_radio(){
+        var turno = "{{curso.turno}}";
+        document.getElementById(turno).checked = true;
+        // alert(turno); 
+    }
+</script>
+</head>
+<body onload="preenche_radio()">
+
+<h1 class="titulo">Adicionar Curso</h1>
+
+<form class="form-card" action="/curso/alterar" method="post">
+
+<label>Nome</label>
+<input type="text" name="nome" value="{{curso.nome}}">
+
+<label>Site</label>
+<input type="text" name="site" value="{{curso.site}}">
+
+<label>Turno</label>
+<div class="radio-group">
+<label><input type="radio" name="turno" value="DIURNO" id="DIURNO"> Diurno</label>
+<label><input type="radio" name="turno" value="NOTURNO" id="NOTURNO"> Noturno</label>
+<label><input type="radio" name="turno" value="VESPERTINO" id="VESPERTINO"> Vespertino</label>
+</div>
+
+<label>Duração</label>
+<input type="number" name="duracao" value="{{curso.duracao}}">
+
+<input type="hidden" name="id" value="{{curso.id}}">
+
+<input class="botao" type="submit" value="Alterar">
+
+</form>
+
+</body>
+</html>
+
