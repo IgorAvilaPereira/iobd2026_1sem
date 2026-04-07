@@ -78,3 +78,6 @@ SELECT * FROM generate_series(
 ## [./08_atividade_pratica_finalizacao_lista1](https://github.com/IgorAvilaPereira/iobd2026_1sem/tree/main/./08_atividade_pratica_finalizacao_lista1) <br>
 <br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/iobd2026_1sem/tree/main/08_atividade_pratica_finalizacao_lista1) <br><br>
 &nbsp;
+[sistemas_requerimentos.dia](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./08_atividade_pratica_finalizacao_lista1/sistemas_requerimentos.dia) <br>
+[sistemas_requerimento.sql](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./08_atividade_pratica_finalizacao_lista1/sistemas_requerimento.sql) <br>
+[sistema_requerimento](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./08_atividade_pratica_finalizacao_lista1/sistema_requerimento) <br>
