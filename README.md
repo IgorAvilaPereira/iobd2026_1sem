@@ -75,3 +75,6 @@ SELECT * FROM generate_series(
 [atividade_pratica.md](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./07_atividade_pratica/atividade_pratica.md) <br>
 <br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/iobd2026_1sem/tree/main/07_atividade_pratica) <br><br>
 &nbsp;
+## [./08_atividade_pratica_finalizacao_lista1](https://github.com/IgorAvilaPereira/iobd2026_1sem/tree/main/./08_atividade_pratica_finalizacao_lista1) <br>
+<br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/iobd2026_1sem/tree/main/08_atividade_pratica_finalizacao_lista1) <br><br>
+&nbsp;
