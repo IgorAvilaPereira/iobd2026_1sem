@@ -76,8 +76,14 @@ SELECT * FROM generate_series(
 <br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/iobd2026_1sem/tree/main/07_atividade_pratica) <br><br>
 &nbsp;
 ## [./08_atividade_pratica_finalizacao_lista1](https://github.com/IgorAvilaPereira/iobd2026_1sem/tree/main/./08_atividade_pratica_finalizacao_lista1) <br>
+[lista.md](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./08_atividade_pratica_finalizacao_lista1/lista.md) <br>
 <br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/iobd2026_1sem/tree/main/08_atividade_pratica_finalizacao_lista1) <br><br>
 &nbsp;
 [sistemas_requerimentos.dia](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./08_atividade_pratica_finalizacao_lista1/sistemas_requerimentos.dia) <br>
 [sistemas_requerimento.sql](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./08_atividade_pratica_finalizacao_lista1/sistemas_requerimento.sql) <br>
 [sistema_requerimento](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./08_atividade_pratica_finalizacao_lista1/sistema_requerimento) <br>
+## [./09_lista1_exercicio60](https://github.com/IgorAvilaPereira/iobd2026_1sem/tree/main/./09_lista1_exercicio60) <br>
+[lista.md](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./09_lista1_exercicio60/lista.md) <br>
+[sistemas_requerimentos.dia](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./09_lista1_exercicio60/sistemas_requerimentos.dia) <br>
+[sistemas_requerimento.sql](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./09_lista1_exercicio60/sistemas_requerimento.sql) <br>
+[sistema_requerimento](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./09_lista1_exercicio60/sistema_requerimento) <br>
