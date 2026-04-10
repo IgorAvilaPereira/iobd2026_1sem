@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Lista de Cursos</title>
+
+<style>
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  padding: 40px;
+}
+
+/* título */
+.titulo{
+  text-align: center;
+  color: white;
+  margin-bottom: 35px;
+}
+
+/* botão adicionar */
+.botao-adicionar{
+  display: block;
+  width: 220px;
+  margin: 0 auto 25px auto;
+  text-align: center;
+  padding: 12px;
+  border-radius: 10px;
+  background: white;
+  color: #667eea;
+  font-weight: bold;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.botao-adicionar:hover{
+  background: #f1f3ff;
+  transform: scale(1.05);
+}
+
+/* lista */
+.lista-cursos{
+  list-style: none;
+  padding: 0;
+  max-width: 600px;
+  margin: auto;
+}
+
+/* item */
+.lista-cursos li{
+  background: white;
+  margin-bottom: 15px;
+  padding: 18px;
+  border-radius: 14px;
+  font-size: 18px;
+  color: #333;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  transition: 0.3s;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.lista-cursos li:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+}
+
+/* nome curso */
+.nome-curso{
+  font-weight: bold;
+}
+
+/* badge id */
+.badge{
+  background: #667eea;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+/* botão excluir */
+.btn-excluir{
+  background: #ff4d4d;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.btn-excluir:hover{
+  background: #e60000;
+  transform: scale(1.08);
+}
+</style>
+
+</head>
+<body>
+{{teste}}
+<h1 class="titulo">Lista de Cursos</h1>
+
+<a class="botao-adicionar" href="/curso/tela_adicionar">+ Adicionar Curso</a>
+
+<ul class="lista-cursos">
+  {{#vetCurso}}
+    <li>
+        <div>
+            <span class="badge">ID {{id}}</span>
+            <span class="nome-curso">{{nome}}</span>
+        </div>
+
+        <a class="btn-excluir" href="/curso/excluir/{{id}}">Excluir</a>
+          <a class="btn-excluir" href="/curso/tela_alterar/{{id}}">Alterar</a>
+
+    </li>
+  {{/vetCurso}}
+</ul>
+  <a href="/usuarios">usuarios</a>
+</body>
+</html>
+
