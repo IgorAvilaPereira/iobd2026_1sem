@@ -84,6 +84,15 @@ SELECT * FROM generate_series(
 [sistema_requerimento](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./08_atividade_pratica_finalizacao_lista1/sistema_requerimento) <br>
 ## [./09_lista1_exercicio60](https://github.com/IgorAvilaPereira/iobd2026_1sem/tree/main/./09_lista1_exercicio60) <br>
 [lista.md](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./09_lista1_exercicio60/lista.md) <br>
+**Agenda**
+
+* 14/04: Lista de Exercícios + Tarefa
+
+* 21/04: Feriado
+
+* 28/04: Atendimento + Revisão Pré-Atividade Avaliada
+
+* 05/05: Atividade Avaliada Presencial + Entrega/Envio Trabalho 
 [sistemas_requerimentos.dia](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./09_lista1_exercicio60/sistemas_requerimentos.dia) <br>
 [sistemas_requerimento.sql](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./09_lista1_exercicio60/sistemas_requerimento.sql) <br>
 [sistema_requerimento](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./09_lista1_exercicio60/sistema_requerimento) <br>
