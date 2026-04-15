@@ -346,7 +346,7 @@ from requerimento order by id;
 -- 70) 
 SELECT id, data_abertura from requerimento where data_hora_abertura in (max(data_hora_abertura), min(data_hora_abertura));|
 
-ALTER TABLE usuario ADD COLUMN senha text  null;
+ALTER TABLE usuario ADD COLUMN senha text null;
 
 
 
