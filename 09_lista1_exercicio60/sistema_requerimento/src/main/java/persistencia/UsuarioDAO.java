@@ -54,7 +54,7 @@ public class UsuarioDAO {
     }
 
     public boolean adicionar(Usuario usuario) throws SQLException {
-        String sql = "INSERT INTO usuario (nome, email, cpf, data_nascimento, cep, rua, complemento, nro) VALUES (?, ?,?, ?, ?, ?, ?, ?) RETURNING id";
+        String sql = "INSERT INTO usuario (nome, email, cpf, data_nascimento, cep, rua, complemento, nro, senha) VALUES (?, ?,?, ?, ?, ?, ?, ?, ?) RETURNING id";
         Connection connection = new ConexaoPostgreSQL().getConexao();
         // embrulhei a string com a consulta sql em verdadeiramente em um instrucao sql
         PreparedStatement instrucaoSQL = connection.prepareStatement(sql);
@@ -66,6 +66,7 @@ public class UsuarioDAO {
         instrucaoSQL.setString(6, usuario.getRua());
         instrucaoSQL.setString(7, usuario.getComplemento());
         instrucaoSQL.setString(8, usuario.getNro());
+        instrucaoSQL.setString(9, usuario.getSenha());
         // execute a consulta sql e atribui o resultado em um objeto de result set
         ResultSet rs = instrucaoSQL.executeQuery();
         if(rs.next()) {
@@ -95,6 +96,7 @@ public class UsuarioDAO {
             usuario.setCep(rs.getString("cep"));
             usuario.setRua(rs.getString("rua"));
             usuario.setComplemento(rs.getString("complemento"));
+            usuario.setSenha(rs.getString("senha"));
             usuario.setNro(rs.getString("nro")); 
         }
         // fecho conexao
@@ -103,8 +105,13 @@ public class UsuarioDAO {
         return usuario;
     }
 
-    public boolean alterar(Usuario usuario) throws SQLException {
-        String sql = "UPDATE usuario SET nome = ?, email = ?, cpf = ?, data_nascimento = ?, cep = ?, rua = ?, complemento = ?, nro = ? where id = ?";
+    public boolean alterar(Usuario usuario, boolean manter_senha) throws SQLException {
+        String sql;
+        if (manter_senha == false){
+            sql = "UPDATE usuario SET nome = ?, email = ?, cpf = ?, data_nascimento = ?, cep = ?, rua = ?, complemento = ?, nro = ?, senha=md5(?) where id = ?";
+        } else {
+            sql = "UPDATE usuario SET nome = ?, email = ?, cpf = ?, data_nascimento = ?, cep = ?, rua = ?, complemento = ?, nro = ? where id = ?";
+        }
         Connection connection = new ConexaoPostgreSQL().getConexao();
         PreparedStatement instrucaoSQL = connection.prepareStatement(sql);
         instrucaoSQL.setString(1, usuario.getNome());
@@ -115,7 +122,12 @@ public class UsuarioDAO {
         instrucaoSQL.setString(6, usuario.getRua());
         instrucaoSQL.setString(7, usuario.getComplemento());
         instrucaoSQL.setString(8, usuario.getNro());
-        instrucaoSQL.setInt(9, usuario.getId());
+        if (manter_senha == false) {
+            instrucaoSQL.setString(9, usuario.getSenha());
+            instrucaoSQL.setInt(10, usuario.getId());
+        } else {
+            instrucaoSQL.setInt(9, usuario.getId());
+        }
         int num = instrucaoSQL.executeUpdate();
         return num != 0;
     }

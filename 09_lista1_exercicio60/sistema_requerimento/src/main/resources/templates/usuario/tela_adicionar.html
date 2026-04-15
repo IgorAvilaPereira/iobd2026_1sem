@@ -109,37 +109,32 @@ body{
 
 <h1 class="titulo">Adicionar usuario</h1>
 
-<form class="form-card" action="/usuario/alterar" method="post">
+<form class="form-card" action="/usuario/adicionar" method="post">
 
 <label>Data Nascimento</label>
-<input type="date" name="data_nascimento" value="{{usuario.dataNascimento}}">
+<input type="date" name="data_nascimento" required>
 
 <label>Nome</label>
-<input type="text" name="nome" value="{{usuario.nome}}">
+<input type="text" name="nome" required>
 
 <label>cpf</label>
-<input type="text" name="cpf" value="{{usuario.cpf}}">
+<input type="text" name="cpf" required>
 
 <label>email</label>
-<input type="text" name="email" value="{{usuario.email}}">
+<input type="text" name="email" required>
 
 <label>cep</label>
-<input type="text" name="cep" value="{{usuario.cep}}">
+<input type="text" name="cep">
 
 <label>rua</label>
-<input type="text" name="rua" value="{{usuario.rua}}">
+<input type="text" name="rua">
 
 <label>complemento</label>
-<input type="text" name="complemento" value="{{usuario.complemento}}">
+<input type="text" name="complemento">
 
 
 
-<label>senha</label> <input type="checkbox" value="manter" name="manter_senha" checked> deseja manter a senha antiga
-<input type="password" name="senha">
-
-<input type="hidden" name="id" value="{{usuario.id}}">
-
-<input class="botao" type="submit" value="Alterar">
+<input class="botao" type="submit" value="Adicionar">
 
 </form>
 

@@ -311,3 +311,42 @@ UPDATE usuario SET data_nascimento = '1987-01-20' where id = 1;
 
 -- 60) SELECT id, nome, email, extract(year from age(data_nascimento)) as idade FROM usuario;
 
+
+-- 61) SELECT * FROM requerimento WHERE data_hora_abertura >= current_date - INTERVAL '7 days';
+
+-- 62) SELECT * FROM requerimento WHERE extract(year from data_hora_abertura) = extract(year from current_date);
+
+-- 63) SELECT * FROM requerimento WHERE extract(year from data_hora_abertura) = extract(year from current_date) and extract(month from data_hora_abertura) = extract(month from current_date);
+
+-- 64) select id, observacao, to_char(data_hora_abertura::date, 'DD/MM/YYYY') from requerimento;
+
+-- 65) select id, data_hora_abertura, data_hora_encerramento, data_hora_encerramento - data_hora_abertura as diferenca_dias from requerimento;
+
+-- 66) 
+select id, 
+    case 
+        when extract(dow from data_hora_abertura) = 0 then 'Domingo'
+        when extract(dow from data_hora_abertura) = 1 then 'Segunda' 
+        -- 
+        -- fazer para demais dias
+        --
+        when extract(dow from data_hora_abertura) = 2 then 'Terça'
+        when extract(dow from data_hora_abertura) = 3 then 'Quarta'
+    else
+        'dia que n fiz por preguiça'
+    end as dia_da_semana
+from requerimento order by id;
+
+-- 67) -- ja fiz
+
+-- 68) -- ja fiz
+
+-- 69)  SELECT * FROM requerimento WHERE data_hora_abertura <= current_timestamp - interval '30 days' and status = 'EM ANÁLISE';
+
+-- 70) 
+SELECT id, data_abertura from requerimento where data_hora_abertura in (max(data_hora_abertura), min(data_hora_abertura));|
+
+ALTER TABLE usuario ADD COLUMN senha text  null;
+
+
+

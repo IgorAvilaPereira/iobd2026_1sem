@@ -88,6 +88,39 @@ public class Main {
                 ctx.render("/templates/curso/tela_adicionar.html");
             });
 
+            config.routes.get("/usuario/tela_adicionar", ctx -> {
+                ctx.render("/templates/usuario/tela_adicionar.html");
+            });
+
+            config.routes.post("/usuario/adicionar", ctx -> {
+                String nome = ctx.formParam("nome");
+                String email = ctx.formParam("email");
+                String senha = ctx.formParam("senha");
+                String cpf = ctx.formParam("cpf");
+                String dataNascimento = ctx.formParam("data_nascimento");
+                String rua = ctx.formParam("rua");
+                String complemento = ctx.formParam("complemento");
+                String nro = ctx.formParam("nro");                               
+
+                Usuario usuario = new Usuario();
+                usuario.setNome(nome);
+                usuario.setEmail(email);
+                usuario.setSenha(senha);
+                System.out.println(dataNascimento);
+                usuario.setDataNascimento(LocalDate.parse(dataNascimento));
+                usuario.setCpf(cpf);
+                usuario.setRua(rua);
+                usuario.setNro(nro);
+                usuario.setComplemento(complemento);
+
+                if (new UsuarioDAO().adicionar(usuario)) {
+                    ctx.redirect("/usuarios");
+                } else {
+                    ctx.redirect("/templates/usuario/tela_adicionar.html");
+                }
+                // ctx.render("/templates/curso/tela_adicionar.html");
+            });
+
              config.routes.post("/curso/adicionar", ctx -> {
                 String nome = ctx.formParam("nome");
                 String site = ctx.formParam("site");
@@ -142,11 +175,22 @@ public class Main {
                 String rua = ctx.formParam("rua");
                 String complemento = ctx.formParam("complemento");  
                 String nro = ctx.formParam("nro");
+                String manter_senha = ctx.formParam("manter_senha");
+                // System.out.println(manter_senha);
+                String senha = ctx.formParam("senha");
                 
                 String dataNascimento = ctx.formParam("data_nascimento");
                 LocalDate date = LocalDate.parse(dataNascimento); 
 
                 Usuario usuario = new Usuario();
+                boolean manter_senha_boolean = true;
+                if (manter_senha != null && manter_senha.equals("manter")) {
+                    usuario = new UsuarioDAO().obter(id);
+                }
+                else if (manter_senha == null){
+                    manter_senha_boolean = false;
+                    usuario.setSenha(senha);
+                }
                 usuario.setId(id);
                 usuario.setNome(nome);
                 usuario.setCpf(cpf);
@@ -156,9 +200,9 @@ public class Main {
                 usuario.setRua(rua);
                 usuario.setNro(nro);
                 usuario.setDataNascimento(date);
-                Map<String, Object> map = new HashMap<>();
 
-                if (new UsuarioDAO().alterar(usuario)) {
+                Map<String, Object> map = new HashMap<>();
+                if (new UsuarioDAO().alterar(usuario, manter_senha_boolean)) {
                     ctx.redirect("/usuarios");
                 } else {
                     // defino um apelido para a colecao de objetos de curso vindos do banco

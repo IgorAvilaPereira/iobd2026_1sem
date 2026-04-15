@@ -12,6 +12,7 @@ public class Usuario {
     private String rua;
     private String complemento;
     private String nro;
+    private String senha;
 
     
     public int getId() {
@@ -67,6 +68,12 @@ public class Usuario {
     }
     public void setNro(String nro) {
         this.nro = nro;
+    }
+    public String getSenha() {
+        return senha;
+    }
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     
