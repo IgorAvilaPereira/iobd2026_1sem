@@ -348,5 +348,57 @@ SELECT id, data_abertura from requerimento where data_hora_abertura in (max(data
 
 ALTER TABLE usuario ADD COLUMN senha text null;
 
+-- 71)
+SELECT * FROM usuario where nome ILIKE 'i%';
+SELECT * FROM usuario where UPPER(nome) LIKE 'I%';
 
+-- 72) e 73) jump
+
+-- 74) 
+select length(trim(nome)) from usuario;
+
+-- 75)
+select nome||' '||email from usuario;
+select concat(nome,' ',email) from usuario;
+
+-- 76) substr(variavel, posicao_partida, qtos_caracteres)
+select nome, cpf, substr(cpf,1, 3)||'.'||substr(cpf,4,3)||'.'||substr(cpf,7,3)||'-'||substr(cpf, 10,2) from usuario;
+
+-- 77)  replace(variavel, o que quero encontrar, pelo que vou substituir)
+SELECT replace(lower(nome), 'igor', 'rogerio') from usuario;
+
+-- 78) jump
+
+-- 79)  deixa a primeira letra de todas as palavras em maiúsculo
+select initcap(nome) from usuario;
+
+-- 80) primeira ocorrencia de um termo: ex: A
+select nome, strpos(upper(nome), 'A') from usuario;
+
+-- 81)
+-- retorna a string (substring) comecando pelo inicio indo ate encontrar o @
+select email, substr(email, 1, strpos(email, '@')-1) from usuario;
+-- quebra a string pelo @ e retorna a primeira parte
+select split_part(email, '@', 1) from usuario;
+
+-- 82)  coloca zeros a esquerda ateh chegar no numero max de caracteres
+select lpad(cpf, 11, '0') from usuario;
+
+-- 83) 
+select rpad(nome, 30, ' ') from usuario;
+-- prova real
+select length(rpad(nome, 30, ' ')), length(nome) from usuario;
+
+-- 84) 
+SELECT replace(nome, ' ', '_') from usuario;
+
+-- 85)
+select substr(nome, 1, 3) from usuario;
+
+-- 86)
+select * from aluno inner join usuario on (aluno.usuario_id = usuario.id) where matricula in(select aluno_matricula from requerimento group by aluno_matricula);
+
+SELECT * FROM aluno tab1 WHERE EXISTS (SELECT * FROM requerimento WHERE requerimento.aluno_matricula = tab1.matricula);
+
+select * from aluno where matricula in(select aluno_matricula from requerimento group by aluno_matricula);
 
