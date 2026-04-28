@@ -95,4 +95,5 @@ SELECT * FROM generate_series(
 * 05/05: Atividade Avaliada Presencial + Entrega/Envio Trabalho 
 [sistemas_requerimentos.dia](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./09_lista1_exercicio60/sistemas_requerimentos.dia) <br>
 [sistemas_requerimento.sql](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./09_lista1_exercicio60/sistemas_requerimento.sql) <br>
+[enade](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./09_lista1_exercicio60/enade) <br>
 [sistema_requerimento](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./09_lista1_exercicio60/sistema_requerimento) <br>
