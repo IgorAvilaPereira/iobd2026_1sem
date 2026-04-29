@@ -3,6 +3,7 @@
 [1_introducao.md](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./01_introducao/1_introducao.md) <br>
 [lista.md](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./01_introducao/lista.md) <br>
 [sistemas_requerimentos.dia](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./01_introducao/sistemas_requerimentos.dia) <br>
+[sistemas_requerimentos.png](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./01_introducao/sistemas_requerimentos.png) <br>
 [sistemas_requerimento.sql](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./01_introducao/sistemas_requerimento.sql) <br>
 [sql1.pdf](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./01_introducao/sql1.pdf) <br>
 [sql2.pdf](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./01_introducao/sql2.pdf) <br>
@@ -29,6 +30,7 @@
 
 <br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/iobd2026_1sem/tree/main/03_exercicios_group_by) <br>
 [sistemas_requerimentos.dia](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./03_exercicios_group_by/sistemas_requerimentos.dia) <br>
+[sistemas_requerimentos.png](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./03_exercicios_group_by/sistemas_requerimentos.png) <br>
 [sistemas_requerimento.sql](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./03_exercicios_group_by/sistemas_requerimento.sql) <br>
 [sql1.pdf](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./03_exercicios_group_by/sql1.pdf) <br>
 [sql2.pdf](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./03_exercicios_group_by/sql2.pdf) <br>
@@ -69,6 +71,7 @@ SELECT * FROM generate_series(
 
 * Exists, IN e etc.
 [sistemas_requerimentos.dia](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./06_schemas/sistemas_requerimentos.dia) <br>
+[sistemas_requerimentos.png](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./06_schemas/sistemas_requerimentos.png) <br>
 [sistemas_requerimento.sql](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./06_schemas/sistemas_requerimento.sql) <br>
 [sistema_requerimento](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./06_schemas/sistema_requerimento) <br>
 ## [./07_atividade_pratica](https://github.com/IgorAvilaPereira/iobd2026_1sem/tree/main/./07_atividade_pratica) <br>
@@ -80,6 +83,7 @@ SELECT * FROM generate_series(
 <br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/iobd2026_1sem/tree/main/08_atividade_pratica_finalizacao_lista1) <br><br>
 &nbsp;
 [sistemas_requerimentos.dia](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./08_atividade_pratica_finalizacao_lista1/sistemas_requerimentos.dia) <br>
+[sistemas_requerimentos.png](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./08_atividade_pratica_finalizacao_lista1/sistemas_requerimentos.png) <br>
 [sistemas_requerimento.sql](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./08_atividade_pratica_finalizacao_lista1/sistemas_requerimento.sql) <br>
 [sistema_requerimento](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./08_atividade_pratica_finalizacao_lista1/sistema_requerimento) <br>
 ## [./09_lista1_exercicio60](https://github.com/IgorAvilaPereira/iobd2026_1sem/tree/main/./09_lista1_exercicio60) <br>
@@ -94,6 +98,7 @@ SELECT * FROM generate_series(
 
 * 05/05: Atividade Avaliada Presencial + Entrega/Envio Trabalho 
 [sistemas_requerimentos.dia](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./09_lista1_exercicio60/sistemas_requerimentos.dia) <br>
+[sistemas_requerimentos.png](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./09_lista1_exercicio60/sistemas_requerimentos.png) <br>
 [sistemas_requerimento.sql](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./09_lista1_exercicio60/sistemas_requerimento.sql) <br>
 [enade](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./09_lista1_exercicio60/enade) <br>
 [sistema_requerimento](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./09_lista1_exercicio60/sistema_requerimento) <br>
