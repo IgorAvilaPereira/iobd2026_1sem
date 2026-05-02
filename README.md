@@ -102,3 +102,6 @@ SELECT * FROM generate_series(
 [sistemas_requerimento.sql](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./09_lista1_exercicio60/sistemas_requerimento.sql) <br>
 [enade](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./09_lista1_exercicio60/enade) <br>
 [sistema_requerimento](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/./09_lista1_exercicio60/sistema_requerimento) <br>
+## [./10_atividade_avaliada1](https://github.com/IgorAvilaPereira/iobd2026_1sem/tree/main/./10_atividade_avaliada1) <br>
+<br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/iobd2026_1sem/tree/main/10_atividade_avaliada1) <br><br>
+&nbsp;
