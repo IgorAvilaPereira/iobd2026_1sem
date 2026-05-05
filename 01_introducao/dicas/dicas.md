@@ -14,6 +14,37 @@
 
    * length(x), lower(x), upper(x), trim(x), strpos(x, y), substr(x, y), substr(x, y, z), replace(x, y, z), repeat(x, y), translate(x, y, z) md5(x), to_char(x, y) e etc.
 
+   * Ex:
+```sql
+SELECT * FROM usuario where nome ILIKE 'i%';
+SELECT * FROM usuario where UPPER(nome) LIKE 'I%';
+select length(trim(nome)) from usuario;
+select nome||' '||email from usuario;
+select concat(nome,' ',email) from usuario;
+-- substr(variavel, posicao_partida, qtos_caracteres)
+select nome, cpf, substr(cpf,1, 3)||'.'||substr(cpf,4,3)||'.'||substr(cpf,7,3)||'-'||substr(cpf, 10,2) from usuario;
+-- replace(variavel, o que quero encontrar, pelo que vou substituir)
+SELECT replace(lower(nome), 'igor', 'rogerio') from usuario;
+-- deixa a primeira letra de todas as palavras em maiúsculo
+select initcap(nome) from usuario;
+-- primeira ocorrencia de um termo: ex: A
+select nome, strpos(upper(nome), 'A') from usuario;
+-- retorna a string (substring) comecando pelo inicio indo ate encontrar o @
+select email, substr(email, 1, strpos(email, '@')-1) from usuario;
+-- quebra a string pelo @ e retorna a primeira parte
+select split_part(email, '@', 1) from usuario;
+-- coloca zeros a esquerda ateh chegar no numero max de caracteres
+select lpad(cpf, 11, '0') from usuario;
+-- coloca zeros a direita ateh chegar no numero max de caracteres
+select rpad(nome, 30, ' ') from usuario;
+-- prova real
+select length(rpad(nome, 30, ' ')), length(nome) from usuario;
+
+SELECT replace(nome, ' ', '_') from usuario;
+select substr(nome, 1, 3) from usuario;
+```
+
+
 ## Principais Tipos de Dados - PostgreSQL
 
 * _**boolean:**_ booleano lógico
