@@ -274,4 +274,3 @@ Será avaliado:
 Total: **5 pontos**
 
 
-Isso deixa o trabalho **bem mais claro para os alunos e muito mais fácil de corrigir**.
